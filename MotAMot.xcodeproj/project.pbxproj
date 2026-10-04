@@ -1,0 +1,337 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B281BF8EBF2809339576F07E /* Answers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108CB5A0883A9672F4F50C5E /* Answers.swift */; };
+		0A0BE8E5F1115A4A06FC8B91 /* LearnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4154CB93D01BCD3EF947491 /* LearnView.swift */; };
+		D3674F32CCFA38D878128407 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD165A5D6214CB10A451887 /* Model.swift */; };
+		14F7C6B2D5A899768A270330 /* MotAMotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DC34C9C475378220F004DD /* MotAMotApp.swift */; };
+		2263CB1FAC65EFEE36493A7A /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A375EF9BEA640A49832C820 /* Quiz.swift */; };
+		3109A9932124CDE76CF53298 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05DC249D0A62C1FD2093B84 /* QuizView.swift */; };
+		7C5791832B6B9E3BFA1CBFB5 /* ReadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4422521F3B4DB77903B8B4 /* ReadView.swift */; };
+		5429919AEAFB172C6444341F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E92075C60F422045F6D7BE /* SettingsView.swift */; };
+		2F81A628D195DA6EB879610B /* Speech.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFEAC693BD20C5B11B047E9 /* Speech.swift */; };
+		89FA6B657053AEFE9BDCFA30 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DE004149A021F5181CB7DA /* Store.swift */; };
+		963B6BAEDB43DE60F8A2C0D6 /* StudyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487F0BECC967C35755339CA1 /* StudyView.swift */; };
+		0C43C71B7E8AD94C35C9476D /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B102C6DA2258BD7801E49 /* Theme.swift */; };
+		11E6AACB18E3C1E420BE7825 /* WordCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE8D7ED73452AF0CC122BEF /* WordCard.swift */; };
+		31886ABF1DBF2E24B452BF5A /* WordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91D0C2A161E745E60467D19 /* WordsView.swift */; };
+		8000ED5F7F7FBD3D74508173 /* forms_index.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7E16A337D4AC41CB06F891D0 /* forms_index.txt */; };
+		D8F07929EF652B3F6B926049 /* words.json in Resources */ = {isa = PBXBuildFile; fileRef = 6A6C415A6124023F23E921AE /* words.json */; };
+		61143D204C27D8A3AD22D48C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32BB636196F91ED59D7A4919 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		F5BF48AA40CAD7891EB709FC /* MotAMot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MotAMot.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		108CB5A0883A9672F4F50C5E /* Answers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answers.swift; sourceTree = "<group>"; };
+		D4154CB93D01BCD3EF947491 /* LearnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnView.swift; sourceTree = "<group>"; };
+		EAD165A5D6214CB10A451887 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		C8DC34C9C475378220F004DD /* MotAMotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotAMotApp.swift; sourceTree = "<group>"; };
+		2A375EF9BEA640A49832C820 /* Quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
+		A05DC249D0A62C1FD2093B84 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
+		EC4422521F3B4DB77903B8B4 /* ReadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadView.swift; sourceTree = "<group>"; };
+		15E92075C60F422045F6D7BE /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		BAFEAC693BD20C5B11B047E9 /* Speech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speech.swift; sourceTree = "<group>"; };
+		B6DE004149A021F5181CB7DA /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		487F0BECC967C35755339CA1 /* StudyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyView.swift; sourceTree = "<group>"; };
+		F61B102C6DA2258BD7801E49 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		2FE8D7ED73452AF0CC122BEF /* WordCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCard.swift; sourceTree = "<group>"; };
+		A91D0C2A161E745E60467D19 /* WordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsView.swift; sourceTree = "<group>"; };
+		7E16A337D4AC41CB06F891D0 /* forms_index.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = forms_index.txt; sourceTree = "<group>"; };
+		6A6C415A6124023F23E921AE /* words.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = words.json; sourceTree = "<group>"; };
+		32BB636196F91ED59D7A4919 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4F6F5CC3FCCF73F75AE9CCF4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2B731CEFC6751AAE0EC69B98 = {
+			isa = PBXGroup;
+			children = (
+				20F4BD606C0F6D1645AE4919 /* MotAMot */,
+				0A2C978E52A76F0AA9F68BB5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		20F4BD606C0F6D1645AE4919 /* MotAMot */ = {
+			isa = PBXGroup;
+			children = (
+				108CB5A0883A9672F4F50C5E /* Answers.swift */,
+				D4154CB93D01BCD3EF947491 /* LearnView.swift */,
+				EAD165A5D6214CB10A451887 /* Model.swift */,
+				C8DC34C9C475378220F004DD /* MotAMotApp.swift */,
+				2A375EF9BEA640A49832C820 /* Quiz.swift */,
+				A05DC249D0A62C1FD2093B84 /* QuizView.swift */,
+				EC4422521F3B4DB77903B8B4 /* ReadView.swift */,
+				15E92075C60F422045F6D7BE /* SettingsView.swift */,
+				BAFEAC693BD20C5B11B047E9 /* Speech.swift */,
+				B6DE004149A021F5181CB7DA /* Store.swift */,
+				487F0BECC967C35755339CA1 /* StudyView.swift */,
+				F61B102C6DA2258BD7801E49 /* Theme.swift */,
+				2FE8D7ED73452AF0CC122BEF /* WordCard.swift */,
+				A91D0C2A161E745E60467D19 /* WordsView.swift */,
+				32BB636196F91ED59D7A4919 /* Assets.xcassets */,
+				307A90002D1285ED8C05A9E0 /* Resources */,
+			);
+			path = MotAMot;
+			sourceTree = "<group>";
+		};
+		307A90002D1285ED8C05A9E0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7E16A337D4AC41CB06F891D0 /* forms_index.txt */,
+				6A6C415A6124023F23E921AE /* words.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		0A2C978E52A76F0AA9F68BB5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F5BF48AA40CAD7891EB709FC /* MotAMot.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		42AEFBAE01D2DFD981F7DA7D /* MotAMot */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84BD75DECF42B745CB4F39AA /* Build configuration list for PBXNativeTarget "MotAMot" */;
+			buildPhases = (
+				F2AB5FB218DA8B84623F4557 /* Sources */,
+				4F6F5CC3FCCF73F75AE9CCF4 /* Frameworks */,
+				55B558C7EF820E6E00E5993B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MotAMot;
+			productName = MotAMot;
+			productReference = F5BF48AA40CAD7891EB709FC /* MotAMot.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		46F86FAA6BBF9AC94A7E4595 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					42AEFBAE01D2DFD981F7DA7D = {
+						CreatedOnToolsVersion = 16.0;
+					};
+				};
+			};
+			buildConfigurationList = C33C66E28B3501D071CFB88C /* Build configuration list for PBXProject "MotAMot" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2B731CEFC6751AAE0EC69B98;
+			productRefGroup = 0A2C978E52A76F0AA9F68BB5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				42AEFBAE01D2DFD981F7DA7D /* MotAMot */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		55B558C7EF820E6E00E5993B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61143D204C27D8A3AD22D48C /* Assets.xcassets in Resources */,
+				8000ED5F7F7FBD3D74508173 /* forms_index.txt in Resources */,
+				D8F07929EF652B3F6B926049 /* words.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F2AB5FB218DA8B84623F4557 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B281BF8EBF2809339576F07E /* Answers.swift in Sources */,
+				0A0BE8E5F1115A4A06FC8B91 /* LearnView.swift in Sources */,
+				D3674F32CCFA38D878128407 /* Model.swift in Sources */,
+				14F7C6B2D5A899768A270330 /* MotAMotApp.swift in Sources */,
+				2263CB1FAC65EFEE36493A7A /* Quiz.swift in Sources */,
+				3109A9932124CDE76CF53298 /* QuizView.swift in Sources */,
+				7C5791832B6B9E3BFA1CBFB5 /* ReadView.swift in Sources */,
+				5429919AEAFB172C6444341F /* SettingsView.swift in Sources */,
+				2F81A628D195DA6EB879610B /* Speech.swift in Sources */,
+				89FA6B657053AEFE9BDCFA30 /* Store.swift in Sources */,
+				963B6BAEDB43DE60F8A2C0D6 /* StudyView.swift in Sources */,
+				0C43C71B7E8AD94C35C9476D /* Theme.swift in Sources */,
+				11E6AACB18E3C1E420BE7825 /* WordCard.swift in Sources */,
+				31886ABF1DBF2E24B452BF5A /* WordsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		6F0B85FC643AF9C218F627EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1B05A9D10F61E514E88AF240 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D87348BDE86A31AE1A1C3907 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Mot \U00e0 Mot";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mohau.motamot;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		024EEA213129F6CB818D8A64 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Mot \U00e0 Mot";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mohau.motamot;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C33C66E28B3501D071CFB88C /* Build configuration list for PBXProject "MotAMot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F0B85FC643AF9C218F627EA /* Debug */,
+				1B05A9D10F61E514E88AF240 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		84BD75DECF42B745CB4F39AA /* Build configuration list for PBXNativeTarget "MotAMot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D87348BDE86A31AE1A1C3907 /* Debug */,
+				024EEA213129F6CB818D8A64 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 46F86FAA6BBF9AC94A7E4595 /* Project object */;
+}
