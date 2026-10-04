@@ -197,7 +197,7 @@ enum WordStatus {
 }
 
 enum Tab: Hashable {
-    case learn, read, words, settings
+    case learn, read, words, courses, settings
 }
 
 // MARK: - Store

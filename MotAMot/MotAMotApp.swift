@@ -45,6 +45,9 @@ struct RootView: View {
             WordsView()
                 .tabItem { Label("Words", systemImage: "list.bullet") }
                 .tag(Tab.words)
+            DeckHubView()
+                .tabItem { Label("Courses", systemImage: "square.grid.2x2") }
+                .tag(Tab.courses)
             SettingsView()
                 .tabItem { Label("Settings", systemImage: "slider.horizontal.3") }
                 .tag(Tab.settings)

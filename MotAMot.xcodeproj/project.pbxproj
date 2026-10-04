@@ -24,6 +24,20 @@
 		B281BF8EBF2809339576F07E /* Answers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108CB5A0883A9672F4F50C5E /* Answers.swift */; };
 		D3674F32CCFA38D878128407 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD165A5D6214CB10A451887 /* Model.swift */; };
 		D8F07929EF652B3F6B926049 /* words.json in Resources */ = {isa = PBXBuildFile; fileRef = 6A6C415A6124023F23E921AE /* words.json */; };
+		847116AD98B1FE9117795867 /* DeckCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED70A4B4C77494DDD40E0C06 /* DeckCardsView.swift */; };
+		35F1618EE1808523896836E4 /* DeckGrading.swift in Sources */ = {isa = PBXBuildFile; fileRef = A514C854AFC438DA85615514 /* DeckGrading.swift */; };
+		77FF17604F4C95BA015F7641 /* DeckHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4672735088D0DCE0A692E68F /* DeckHomeView.swift */; };
+		C1C94961B4B3CA95896742F2 /* DeckHubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62D2E0762E6DDA9ED58F626 /* DeckHubView.swift */; };
+		93080929DB52E84B549FD1CF /* DeckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCE9ED6FDC4794436D0AFEC /* DeckModel.swift */; };
+		143CFCCB11A9FB3DF2DFB976 /* DeckRich.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88999D3B862542BA5912CEE /* DeckRich.swift */; };
+		C1ED768C2520B642C0F71424 /* DeckSessionViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FE7ADCA8468921F9A13402 /* DeckSessionViews.swift */; };
+		A6F25E83963CE8128843BDFB /* DeckStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFE018EB6F1D1D2C6BD9338 /* DeckStore.swift */; };
+		874CF5FC9A3646AC65F8AC51 /* atlas.json in Resources */ = {isa = PBXBuildFile; fileRef = 77EFAA7D4A3B786992F69C0F /* atlas.json */; };
+		04AF02ED2D8A173A2CAE898E /* decks-index.json in Resources */ = {isa = PBXBuildFile; fileRef = EBE2EDEB3A330D02F1C68E92 /* decks-index.json */; };
+		C0CA89FF14E25620853BD13C /* desk-skills.json in Resources */ = {isa = PBXBuildFile; fileRef = 14CB426A3D34607E222079E4 /* desk-skills.json */; };
+		098910E876EE5738A332ED65 /* fret-by-fret.json in Resources */ = {isa = PBXBuildFile; fileRef = CB9907A44AFEE667BB5007A8 /* fret-by-fret.json */; };
+		161FF3734B5846484AC6C454 /* py-by-py.json in Resources */ = {isa = PBXBuildFile; fileRef = 7BF2C058E55864E9DD27F88B /* py-by-py.json */; };
+		6AC3C3DB7BC9E572DAED57E4 /* slide-by-slide.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C59D22DEF302ADFF4C0F80C /* slide-by-slide.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +59,20 @@
 		EC4422521F3B4DB77903B8B4 /* ReadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadView.swift; sourceTree = "<group>"; };
 		F5BF48AA40CAD7891EB709FC /* MotAMot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MotAMot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F61B102C6DA2258BD7801E49 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		ED70A4B4C77494DDD40E0C06 /* DeckCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckCardsView.swift; sourceTree = "<group>"; };
+		A514C854AFC438DA85615514 /* DeckGrading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckGrading.swift; sourceTree = "<group>"; };
+		4672735088D0DCE0A692E68F /* DeckHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckHomeView.swift; sourceTree = "<group>"; };
+		E62D2E0762E6DDA9ED58F626 /* DeckHubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckHubView.swift; sourceTree = "<group>"; };
+		FCCE9ED6FDC4794436D0AFEC /* DeckModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckModel.swift; sourceTree = "<group>"; };
+		A88999D3B862542BA5912CEE /* DeckRich.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckRich.swift; sourceTree = "<group>"; };
+		A4FE7ADCA8468921F9A13402 /* DeckSessionViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckSessionViews.swift; sourceTree = "<group>"; };
+		7AFE018EB6F1D1D2C6BD9338 /* DeckStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckStore.swift; sourceTree = "<group>"; };
+		77EFAA7D4A3B786992F69C0F /* atlas.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = atlas.json; sourceTree = "<group>"; };
+		EBE2EDEB3A330D02F1C68E92 /* decks-index.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = decks-index.json; sourceTree = "<group>"; };
+		14CB426A3D34607E222079E4 /* desk-skills.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = desk-skills.json; sourceTree = "<group>"; };
+		CB9907A44AFEE667BB5007A8 /* fret-by-fret.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fret-by-fret.json; sourceTree = "<group>"; };
+		7BF2C058E55864E9DD27F88B /* py-by-py.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = py-by-py.json; sourceTree = "<group>"; };
+		5C59D22DEF302ADFF4C0F80C /* slide-by-slide.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = slide-by-slide.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +112,7 @@
 				2FE8D7ED73452AF0CC122BEF /* WordCard.swift */,
 				A91D0C2A161E745E60467D19 /* WordsView.swift */,
 				32BB636196F91ED59D7A4919 /* Assets.xcassets */,
+				66968B99C6E368A805CD322A /* Decks */,
 				307A90002D1285ED8C05A9E0 /* Resources */,
 			);
 			path = MotAMot;
@@ -102,6 +131,35 @@
 			children = (
 				7E16A337D4AC41CB06F891D0 /* forms_index.txt */,
 				6A6C415A6124023F23E921AE /* words.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		66968B99C6E368A805CD322A /* Decks */ = {
+			isa = PBXGroup;
+			children = (
+				ED70A4B4C77494DDD40E0C06 /* DeckCardsView.swift */,
+				A514C854AFC438DA85615514 /* DeckGrading.swift */,
+				4672735088D0DCE0A692E68F /* DeckHomeView.swift */,
+				E62D2E0762E6DDA9ED58F626 /* DeckHubView.swift */,
+				FCCE9ED6FDC4794436D0AFEC /* DeckModel.swift */,
+				A88999D3B862542BA5912CEE /* DeckRich.swift */,
+				A4FE7ADCA8468921F9A13402 /* DeckSessionViews.swift */,
+				7AFE018EB6F1D1D2C6BD9338 /* DeckStore.swift */,
+				C6A0CB250704C661E1751475 /* Resources */,
+			);
+			path = Decks;
+			sourceTree = "<group>";
+		};
+		C6A0CB250704C661E1751475 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				77EFAA7D4A3B786992F69C0F /* atlas.json */,
+				EBE2EDEB3A330D02F1C68E92 /* decks-index.json */,
+				14CB426A3D34607E222079E4 /* desk-skills.json */,
+				CB9907A44AFEE667BB5007A8 /* fret-by-fret.json */,
+				7BF2C058E55864E9DD27F88B /* py-by-py.json */,
+				5C59D22DEF302ADFF4C0F80C /* slide-by-slide.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -167,6 +225,12 @@
 				61143D204C27D8A3AD22D48C /* Assets.xcassets in Resources */,
 				8000ED5F7F7FBD3D74508173 /* forms_index.txt in Resources */,
 				D8F07929EF652B3F6B926049 /* words.json in Resources */,
+				874CF5FC9A3646AC65F8AC51 /* atlas.json in Resources */,
+				04AF02ED2D8A173A2CAE898E /* decks-index.json in Resources */,
+				C0CA89FF14E25620853BD13C /* desk-skills.json in Resources */,
+				098910E876EE5738A332ED65 /* fret-by-fret.json in Resources */,
+				161FF3734B5846484AC6C454 /* py-by-py.json in Resources */,
+				6AC3C3DB7BC9E572DAED57E4 /* slide-by-slide.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,6 +255,14 @@
 				0C43C71B7E8AD94C35C9476D /* Theme.swift in Sources */,
 				11E6AACB18E3C1E420BE7825 /* WordCard.swift in Sources */,
 				31886ABF1DBF2E24B452BF5A /* WordsView.swift in Sources */,
+				847116AD98B1FE9117795867 /* DeckCardsView.swift in Sources */,
+				35F1618EE1808523896836E4 /* DeckGrading.swift in Sources */,
+				77FF17604F4C95BA015F7641 /* DeckHomeView.swift in Sources */,
+				C1C94961B4B3CA95896742F2 /* DeckHubView.swift in Sources */,
+				93080929DB52E84B549FD1CF /* DeckModel.swift in Sources */,
+				143CFCCB11A9FB3DF2DFB976 /* DeckRich.swift in Sources */,
+				C1ED768C2520B642C0F71424 /* DeckSessionViews.swift in Sources */,
+				A6F25E83963CE8128843BDFB /* DeckStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
