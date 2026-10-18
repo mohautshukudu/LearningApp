@@ -103,6 +103,10 @@ private struct ReviewCard: View {
                 Button("By typing") { store.startReview(style: "type") }
                     .buttonStyle(PrimaryButtonStyle(filled: false))
             }
+            Button("Study them first") {
+                store.startStudy(ids: store.dueWords.prefix(40).map { $0.id })
+            }
+            .buttonStyle(SmallButtonStyle())
         }
     }
 }
