@@ -1,0 +1,885 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Learn Python by repetition: predict the output, answer concepts, run code in your browser, with spaced review.">
+<meta name="theme-color" content="#3776AB">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Py by Py">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233776AB'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle' fill='white' font-family='Georgia'%3EP%3C/text%3E%3C/svg%3E">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>Py by Py</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Caveat:wght@500;700&family=Young+Serif&display=swap">
+<style>
+
+:root{
+  --paper:#F5F7FC; --card:#FFFFFF; --ink:#1B2440; --muted:#5B6484; --faint:#8A92AE;
+  --rule:#DCE3F2; --rule-strong:#C9D2EA; --margin:#E0575B;
+  --pen:#2F6BA8; --pen-ink:#FFFFFF; --pen-soft:#E3EEFA;
+  --good:#1D8052; --good-soft:#E1F3EA; --bad:#BF3B3B; --bad-soft:#FBE7E6; --warn:#9A6414; --warn-soft:#FBF0DC;
+  --masc:#2F6FB5; --masc-soft:#E3EEFA; --fem:#B8406E; --fem-soft:#FAE6EE;
+  --shadow:0 1px 2px rgba(27,36,64,.06),0 6px 20px rgba(27,36,64,.07);
+  --f-ui:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-word:"Young Serif",Georgia,"Times New Roman",serif;
+  --f-hand:"Caveat","Segoe Script","Bradley Hand",cursive;
+  --radius:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0F1320; --card:#171C2C; --ink:#E7EAF6; --muted:#A1A9C6; --faint:#6F7896;
+    --rule:#1C2335; --rule-strong:#283149; --margin:#8C3439;
+    --pen:#7FB6F0; --pen-ink:#0F1320; --pen-soft:#1B2A40;
+    --good:#52C992; --good-soft:#15352A; --bad:#F08080; --bad-soft:#3B1D22; --warn:#E6B45E; --warn-soft:#3A2D14;
+    --masc:#86B6F0; --masc-soft:#1B2A40; --fem:#F08DB4; --fem-soft:#3A1D2B;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+    --paper:#0F1320; --card:#171C2C; --ink:#E7EAF6; --muted:#A1A9C6; --faint:#6F7896;
+    --rule:#1C2335; --rule-strong:#283149; --margin:#8C3439;
+    --pen:#7FB6F0; --pen-ink:#0F1320; --pen-soft:#1B2A40;
+    --good:#52C992; --good-soft:#15352A; --bad:#F08080; --bad-soft:#3B1D22; --warn:#E6B45E; --warn-soft:#3A2D14;
+    --masc:#86B6F0; --masc-soft:#1B2A40; --fem:#F08DB4; --fem-soft:#3A1D2B;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; background-color:var(--paper); color:var(--ink); font:16px/1.5 var(--f-ui);
+  background-image:repeating-linear-gradient(to bottom,transparent 0 31px,var(--rule) 31px 32px);
+  -webkit-font-smoothing:antialiased;
+}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--pen);outline-offset:2px;border-radius:8px}
+.page{
+  position:relative; max-width:600px; margin:0 auto; min-height:100%;
+  padding-inline:16px 16px; padding-block:12px calc(96px + env(safe-area-inset-bottom,0px));
+}
+@media (min-width:640px){
+  .page{padding-inline:44px 24px}
+  .page::before{content:"";position:absolute;left:28px;top:0;bottom:0;width:2px;background:var(--margin);opacity:.55}
+}
+/* top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;
+  padding-block:10px 12px;margin-inline:-16px;padding-inline:16px;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+.titles{display:flex;flex-direction:column;gap:0}
+.screen{font-family:var(--f-label,var(--f-ui));font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.logo{font-family:var(--f-hand);font-size:1.3rem;line-height:1.2;color:var(--pen);margin:0;font-weight:400}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:var(--card);border:1px solid var(--rule-strong);font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.pill b{color:var(--ink)}
+h2{font-size:1.2rem;margin:0;text-wrap:balance}
+h3{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:16px 0 6px;font-weight:700}
+p{margin:0}
+.muted{color:var(--muted)}
+.small{font-size:.86rem}
+.stack{display:flex;flex-direction:column;gap:12px}
+.card .stack{gap:10px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.spread{justify-content:space-between}
+.card{background:var(--card);border:1px solid var(--rule-strong);border-radius:var(--radius);padding:16px}
+.card.lift{box-shadow:var(--shadow);border-color:transparent}
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:10px 18px;border-radius:12px;border:1px solid var(--rule-strong);background:var(--card);font-weight:700;text-decoration:none;transition:transform .08s ease,background .15s}
+.btn:active{transform:scale(.98)}
+.btn.primary{background:var(--pen);border-color:var(--pen);color:var(--pen-ink)}
+.btn.ghost{background:transparent;border-color:transparent;color:var(--pen)}
+.btn.danger{color:var(--bad);border-color:var(--bad)}
+.btn.wide{width:100%}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.icon-btn{width:46px;height:46px;border-radius:50%;display:inline-grid;place-items:center;border:1px solid var(--rule-strong);background:var(--card);font-size:1.15rem;flex:none}
+.icon-btn svg{width:22px;height:22px}
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn{flex-direction:column;gap:2px}
+.btn .sub{display:block;font-size:.68rem;font-weight:400;opacity:.75;letter-spacing:.01em}
+/* progress */
+.bar{height:10px;border-radius:99px;background:var(--pen-soft);overflow:hidden}
+.stage{border-top:1px dashed var(--rule-strong);padding-top:10px;display:flex;flex-direction:column;gap:6px}
+.bar>i{display:block;height:100%;background:var(--pen);border-radius:99px;transition:width .3s ease}
+.big-num{font-family:var(--f-word);font-size:2.3rem;line-height:1;font-variant-numeric:tabular-nums}
+/* ladder */
+.ladder{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:2px}
+.rung{border:1px solid var(--rule-strong);border-radius:12px;padding:10px 12px;background:var(--paper);display:flex;flex-direction:column;gap:2px;text-align:left;min-height:76px}
+.rung .lvl{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.rung .name{font-weight:700}
+.rung .st{font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums;margin-top:auto}
+.rung.passed{background:var(--good-soft);border-color:transparent}
+.rung.passed .st{color:var(--good);font-weight:700}
+.rung.ready{border-color:var(--pen);box-shadow:inset 0 0 0 1px var(--pen);background:var(--card)}
+.rung.locked{opacity:.55}
+.batch-list{display:flex;flex-direction:column;gap:0}
+.batch-list .bl{width:100%;display:flex;flex-direction:column;gap:8px;padding:12px 2px;border-bottom:1px solid var(--rule);font-variant-numeric:tabular-nums;font-size:.92rem}
+.batch-list .bl-t{display:flex;align-items:baseline;justify-content:space-between;gap:10px;min-width:0}
+.batch-list .bl-a{display:grid;grid-template-columns:.8fr 1fr 1fr;gap:6px}
+.batch-list .bl-a .mini{padding:7px 4px;white-space:nowrap;font-size:.8rem}
+.mini{border:1px solid var(--rule-strong);background:var(--card);border-radius:9px;padding:7px 10px;font-size:.82rem;font-weight:700;min-height:36px}
+.mini.solid{background:var(--pen);border-color:var(--pen);color:var(--pen-ink)}
+.batch-list .bl:last-child{border-bottom:0}
+.notice{border-radius:12px;padding:12px 14px;background:var(--warn-soft);color:var(--warn);font-size:.9rem}
+.notice.good{background:var(--good-soft);color:var(--good)}
+/* chips */
+.chip{display:inline-flex;align-items:center;padding:2px 9px;border-radius:999px;font-size:.76rem;font-weight:700;background:var(--pen-soft);color:var(--pen);letter-spacing:.02em}
+.chip.m{background:var(--masc-soft);color:var(--masc)}
+.chip.f{background:var(--fem-soft);color:var(--fem)}
+.chip.plain{background:transparent;border:1px solid var(--rule-strong);color:var(--muted);font-weight:400}
+/* word card */
+.wordcard{text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px 16px}
+.visual.flat{min-height:0}
+.visual{position:relative;width:100%;max-width:100%;display:flex;justify-content:center;align-items:center;gap:14px;min-height:112px}
+.emoji{font-size:4.6rem;line-height:1.1}
+.photo{width:128px;height:112px;max-width:45%;border-radius:12px;object-fit:cover;background:var(--pen-soft)}
+.photo-x{position:absolute;right:0;bottom:-4px;font-size:.72rem;border:0;background:transparent;color:var(--faint);text-decoration:underline;padding:2px}
+.fr{font-family:var(--f-word);font-size:clamp(2.1rem,9vw,2.9rem);line-height:1.1;overflow-wrap:anywhere;margin:0}
+.fr .art{color:var(--faint)}
+.fr.m .art{color:var(--masc)} .fr.f .art{color:var(--fem)}
+.en{font-size:1.2rem;font-weight:700;line-height:1.35}
+.example{border-top:1px solid var(--rule);padding-top:12px;margin-top:2px;width:100%;display:flex;gap:12px;align-items:flex-start;text-align:left}
+.example .ex-fr{font-family:var(--f-word);font-size:1.08rem}
+mark{background:var(--pen-soft);color:var(--ink);border-radius:4px;padding:0 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.feedback mark{background:rgba(127,127,127,.18);color:inherit}
+.form-note{font-size:.82rem;color:var(--muted);margin-top:2px}
+.contraction{font-size:.82rem;color:var(--muted);margin-top:2px}
+.contraction b{color:var(--ink);font-family:var(--f-word);font-weight:400}
+.dictform{margin-top:8px;padding:8px 10px;border-radius:10px;background:var(--paper)}
+.form-note b{color:var(--ink);font-family:var(--f-word);font-weight:400}
+.whybtn{border:1px solid var(--rule-strong);background:var(--card);color:var(--muted);width:20px;height:20px;border-radius:50%;font-size:.7rem;line-height:1;padding:0;vertical-align:middle}
+/* reading */
+.article{font-family:var(--f-word);font-size:1.12rem;line-height:1.85}
+.article .tok{border:0;background:transparent;padding:0 1px;font:inherit;color:inherit;border-radius:4px}
+.article .tok.known{background:var(--good-soft);color:var(--good)}
+.article .tok.current{background:var(--pen-soft);color:var(--pen)}
+.article .tok.soon{border-bottom:1.5px dotted var(--faint)}
+.slots{display:flex;flex-wrap:wrap;gap:6px;min-height:52px;padding:10px;border:1.5px dashed var(--rule-strong);border-radius:12px;align-items:center}
+.tiles{display:flex;flex-wrap:wrap;gap:6px}
+.tile{font-family:var(--f-word);font-size:1.05rem;padding:8px 12px;border-radius:10px;border:1px solid var(--rule-strong);background:var(--card)}
+.tile.placed{background:var(--pen-soft);border-color:var(--pen);color:var(--pen)}
+.tile.good{background:var(--good-soft);border-color:var(--good);color:var(--good)}
+.tile.bad{background:var(--bad-soft);border-color:var(--bad);color:var(--bad)}
+.article-img{width:100%;max-height:200px;object-fit:cover;border-radius:12px}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:.78rem;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+.reveal{border:1px dashed var(--rule-strong);border-radius:10px;padding:10px 16px;background:transparent;color:var(--muted);width:100%}
+/* quiz */
+.qhead{position:sticky;top:calc(env(safe-area-inset-top,0px) + 54px);z-index:5;display:flex;align-items:center;gap:12px;margin-bottom:12px;
+  padding-block:8px;background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(6px)}
+.sticky-bar{position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 8px);z-index:4;padding-top:8px;
+  background:linear-gradient(to top,var(--paper) 72%,transparent)}
+.qhead .bar{flex:1}
+.prompt{min-height:180px;justify-content:center}
+.options{display:grid;grid-template-columns:1fr;gap:10px}
+@media (min-width:480px){.options{grid-template-columns:1fr 1fr}}
+.opt{min-height:56px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--rule-strong);background:var(--card);text-align:left;font-weight:700;display:flex;align-items:center;gap:10px}
+.opt .k{flex:none;width:24px;height:24px;border-radius:6px;border:1px solid var(--rule-strong);display:grid;place-items:center;font-size:.72rem;color:var(--faint)}
+.opt.fr-opt{font-family:var(--f-word);font-weight:400;font-size:1.15rem}
+.opt.correct{border-color:var(--good);background:var(--good-soft);color:var(--good)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft);color:var(--bad)}
+.opt[disabled]{cursor:default}
+.type-in{width:100%;font-family:var(--f-word);font-size:1.5rem;padding:12px 14px;border-radius:12px;border:1.5px solid var(--rule-strong);background:var(--card);text-align:center}
+.type-in:focus{outline:none;border-color:var(--pen)}
+.type-in.correct{border-color:var(--good);background:var(--good-soft)}
+.type-in.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.accents{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.accents button{min-width:40px;height:40px;border-radius:8px;border:1px solid var(--rule-strong);background:var(--card);font-family:var(--f-word);font-size:1.05rem}
+.feedback{border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:4px;text-align:left}
+.feedback.good{background:var(--good-soft);color:var(--good)}
+.feedback.bad{background:var(--bad-soft);color:var(--bad)}
+.feedback .hand{font-family:var(--f-hand);font-size:1.15rem}
+.feedback .fb-body{color:var(--ink)}
+.listen-hero{display:flex;gap:14px;justify-content:center;align-items:center}
+.play-big{width:96px;height:96px;border-radius:50%;border:0;background:var(--pen);color:var(--pen-ink);display:grid;place-items:center}
+.play-big svg{width:40px;height:40px}
+.result-score{font-family:var(--f-word);font-size:4rem;line-height:1}
+.praise{font-family:var(--f-hand);font-size:1.6rem;color:var(--pen)}
+.missed{display:flex;flex-direction:column}
+.missed .mrow{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--rule)}
+.missed .mrow:last-child{border-bottom:0}
+.mrow .w{font-family:var(--f-word);font-size:1.05rem}
+/* word list */
+.search{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--rule-strong);background:var(--card)}
+.sticky-search{position:sticky;top:calc(env(safe-area-inset-top,0px) + 54px);z-index:5;display:flex;flex-direction:column;gap:8px;
+  padding-block:8px;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(6px)}
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.filters button{padding:6px 12px;border-radius:999px;border:1px solid var(--rule-strong);background:var(--card);font-size:.86rem}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.wl{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--rule-strong);border-radius:var(--radius);overflow:hidden}
+.wrow{display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:center;padding:10px 12px;border:0;border-bottom:1px solid var(--rule);background:transparent;text-align:left;width:100%}
+.wrow:last-child{border-bottom:0}
+.wrow .n{font-size:.76rem;color:var(--faint);font-variant-numeric:tabular-nums}
+.wrow .t{display:flex;flex-direction:column;min-width:0}
+.wrow .t b{font-family:var(--f-word);font-weight:400;font-size:1.08rem}
+.wrow .t span{font-size:.86rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--rule-strong)}
+.dot.learned{background:var(--good)} .dot.current{background:var(--pen)} .dot.due{background:var(--warn)}
+/* settings */
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-weight:700}
+.field select,.field input[type=number],.field textarea{padding:10px 12px;border-radius:10px;border:1px solid var(--rule-strong);background:var(--card)}
+.field textarea{min-height:84px;font:12px/1.4 ui-monospace,Menlo,monospace;resize:vertical}
+details.card>summary{cursor:pointer;list-style:none;font-size:1rem}
+details.card>summary::-webkit-details-marker{display:none}
+details.card>summary::after{content:"▾";float:right;color:var(--muted)}
+details.card[open]>summary::after{content:"▴"}
+.switch{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.switch input{width:22px;height:22px;accent-color:var(--pen)}
+/* tab bar */
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--card);border-top:1px solid var(--rule-strong);padding-bottom:env(safe-area-inset-bottom,0px)}
+.tabs nav{max-width:600px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.tabs button{border:0;background:transparent;padding:10px 4px 12px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.76rem;color:var(--muted)}
+.tabs button svg{width:22px;height:22px}
+.tabs button[aria-current="page"]{color:var(--pen);font-weight:700}
+/* modal */
+.modal{position:fixed;inset:0;z-index:20;background:rgba(10,14,28,.5);display:flex;align-items:flex-end;justify-content:center;padding:16px}
+.modal .sheet{width:100%;max-width:560px;max-height:90%;overflow:auto;margin-bottom:env(safe-area-inset-bottom,0px)}
+@media (min-width:640px){.modal{align-items:center}}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:10px;font-size:.9rem;z-index:30;max-width:calc(100% - 32px)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.pop{animation:pop .25s ease}
+@keyframes pop{from{transform:scale(.96);opacity:.6}to{transform:none;opacity:1}}
+
+:root{--maple:#EAD3A0;--maple-line:#B38F55;--rose:#5B2E22;--string:#7A8185}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--maple:#B8975F;--maple-line:#7E6238;--string:#C3CBCD}}
+:root[data-theme="dark"]{--maple:#B8975F;--maple-line:#7E6238;--string:#C3CBCD}
+.fbwrap{overflow-x:auto;width:100%;margin:2px 0}
+.fretsvg{width:100%;max-width:560px;display:block;height:auto;margin:0 auto}
+.fretsvg .board{fill:var(--maple)}
+.fretsvg .fretline{stroke:var(--maple-line);stroke-width:2}
+.fretsvg .nut{stroke:var(--rose);stroke-width:6}
+.fretsvg .str{stroke:var(--string)}
+.fretsvg .inlay{fill:var(--maple-line);opacity:.4}
+.fretsvg .fnum{fill:var(--muted);font-size:11px;text-anchor:middle}
+.fdot circle{stroke:#fff;stroke-width:2}
+.fdot text{fill:#fff;font:700 11px var(--f-ui);text-anchor:middle;pointer-events:none}
+.d-note circle{fill:var(--rose)}.d-root circle{fill:var(--pen)}.d-sel circle{fill:var(--ink)}.d-ok circle{fill:var(--good)}.d-bad circle{fill:var(--bad)}
+.rowhl{fill:var(--pen);opacity:.16}
+.cell{fill:transparent;cursor:pointer}.cell:hover{fill:rgba(255,255,255,.35)}
+.cell:focus-visible{outline:3px solid var(--pen)}
+.pbtn{border:1px solid var(--rule-strong);background:var(--card);border-radius:10px;padding:8px 14px;font-weight:700;color:var(--ink)}
+.pbtn.sm{padding:2px 10px;border-radius:8px}
+.tbl{width:100%;border-collapse:collapse;font-size:.92rem;margin:8px 0}
+.tbl th,.tbl td{text-align:left;padding:6px 6px;border-bottom:1px solid var(--rule)}
+.tbl th{color:var(--muted);font-weight:700;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase}
+pre.tab{background:var(--paper);border:1px solid var(--rule-strong);border-radius:10px;padding:12px;overflow-x:auto;font-size:.95rem;line-height:1.3;margin:8px 0}
+.wordcard .example{display:block}
+.wordcard .example p{margin:0 0 8px}
+.fr.ans{max-width:100%}
+
+
+.code,.pyout,.pgarea{font:13.5px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.code{text-align:left;background:var(--paper);border:1px solid var(--rule-strong);border-radius:10px;padding:12px;width:100%;overflow-x:auto;white-space:pre;margin:4px 0;color:var(--ink)}
+.pyout{background:#111827;color:#d1fae5;border-radius:10px;padding:10px 12px;margin:6px 0 0;white-space:pre-wrap;min-height:0;width:100%;text-align:left}
+.pyout:empty{display:none}
+.pyrun{width:100%;text-align:left}
+.pyrun .row{margin-top:6px}
+.pgarea{width:100%;background:var(--paper);color:var(--ink);border:1.5px solid var(--rule-strong);border-radius:12px;padding:12px;resize:vertical;tab-size:4}
+.pgarea:focus{outline:none;border-color:var(--pen)}
+code{font:13px ui-monospace,Menlo,Consolas,monospace;background:var(--pen-soft);padding:1px 5px;border-radius:5px}
+.tbl{width:100%;border-collapse:collapse;font-size:.92rem;margin:8px 0}.tbl th,.tbl td{text-align:left;padding:6px;border-bottom:1px solid var(--rule)}.tbl th{color:var(--muted);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase}
+.feedback .code{background:rgba(127,127,127,.12)}
+
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <div class="titles"><h1 class="logo">Py by Py</h1><p class="screen" id="screen-title">Learn</p></div>
+    <div class="row" id="topstats"></div>
+  </header>
+  <main id="app" aria-live="polite"></main>
+  <noscript><p class="card">Py by Py needs JavaScript turned on.</p></noscript>
+</div>
+<div class="tabs" id="tabs"></div>
+<div id="modal-root"></div>
+<script>
+/* ===================== Py by Py ===================== */
+const PYC=[{"stage": "Print & values", "ti": "Print text", "code": "print(\"Hello, world\")", "out": "Hello, world", "a": "Hello, world", "why": "print() shows text on screen. Text (a string) goes inside quotes."}, {"stage": "Print & values", "ti": "Print a number", "code": "print(42)", "out": "42", "a": "42", "why": "Numbers do not need quotes."}, {"stage": "Print & values", "ti": "Print a sum", "code": "print(2 + 3)", "out": "5", "a": "5", "why": "Python evaluates the sum first, then prints the result."}, {"stage": "Print & values", "ti": "Text vs maths", "code": "print(\"2 + 3\")", "out": "2 + 3", "a": "2 + 3", "why": "Inside quotes it is just text, so Python prints it exactly as written."}, {"stage": "Print & values", "ti": "Several values", "code": "print(\"Age:\", 30)", "out": "Age: 30", "a": "Age: 30", "why": "print() accepts several values and puts a space between them."}, {"stage": "Print & values", "ti": "Custom separator", "code": "print(\"a\", \"b\", \"c\", sep=\"-\")", "out": "a-b-c", "a": "a-b-c", "why": "sep changes what goes between the values (a space by default)."}, {"stage": "Print & values", "ti": "Custom ending", "code": "print(\"Hi\", end=\"!\")\nprint(\"there\")", "out": "Hi!there", "a": "Hi!there", "why": "end changes what goes after each print. Here it replaces the new line with !, so both prints share a line."}, {"stage": "Print & values", "ti": "Comments", "code": "# print(\"hidden\")\nprint(\"shown\")", "out": "shown", "a": "shown", "why": "A # starts a comment. Python ignores everything after it on that line."}, {"stage": "Numbers & operators", "ti": "Division", "code": "print(7 / 2)", "out": "3.5", "a": "3.5", "why": "/ always gives a decimal (float) answer."}, {"stage": "Numbers & operators", "ti": "Floor division", "code": "print(7 // 2)", "out": "3", "a": "3", "why": "// divides and rounds down to a whole number."}, {"stage": "Numbers & operators", "ti": "Remainder", "code": "print(7 % 2)", "out": "1", "a": "1", "why": "% gives the remainder after division. Handy for checking odd and even."}, {"stage": "Numbers & operators", "ti": "Power", "code": "print(2 ** 3)", "out": "8", "a": "8", "why": "** raises to a power: 2 × 2 × 2."}, {"stage": "Numbers & operators", "ti": "Order of operations", "code": "print(2 + 3 * 4)", "out": "14", "a": "14", "why": "Multiplication happens before addition, just like in maths."}, {"stage": "Numbers & operators", "ti": "Brackets", "code": "print((2 + 3) * 4)", "out": "20", "a": "20", "why": "Brackets are evaluated first."}, {"stage": "Numbers & operators", "ti": "Rounding", "code": "print(round(3.14159, 2))", "out": "3.14", "a": "3.14", "why": "round(number, digits) rounds to that many decimal places."}, {"stage": "Numbers & operators", "ti": "Absolute value", "code": "print(abs(-9))", "out": "9", "a": "9", "why": "abs() drops the minus sign."}, {"stage": "Numbers & operators", "ti": "Int and float", "code": "print(int(3.9))", "out": "3", "a": "3", "why": "int() cuts off the decimal part. It does not round."}, {"stage": "Variables & types", "ti": "Variables", "code": "x = 5\ny = x + 2\nprint(y)", "out": "7", "a": "7", "why": "A variable stores a value under a name. = assigns; it does not mean \"equals\"."}, {"stage": "Variables & types", "ti": "Reassigning", "code": "n = 10\nn = n + 1\nprint(n)", "out": "11", "a": "11", "why": "Variables can change. The right side is worked out first, then stored."}, {"stage": "Variables & types", "ti": "Shortcut operator", "code": "n = 10\nn += 5\nprint(n)", "out": "15", "a": "15", "why": "n += 5 means n = n + 5."}, {"stage": "Variables & types", "ti": "type() of int", "code": "print(type(5))", "out": "<class 'int'>", "a": "<class 'int'>", "why": "Whole numbers are of type int."}, {"stage": "Variables & types", "ti": "type() of float", "code": "print(type(5.0))", "out": "<class 'float'>", "a": "<class 'float'>", "why": "Numbers with a decimal point are floats, even if the decimal is .0."}, {"stage": "Variables & types", "ti": "type() of str", "code": "print(type(\"5\"))", "out": "<class 'str'>", "a": "<class 'str'>", "why": "Anything in quotes is a string, even digits."}, {"stage": "Variables & types", "ti": "Booleans", "code": "print(5 > 3)", "out": "True", "a": "True", "why": "Comparisons give True or False (type bool). Note the capital letters."}, {"stage": "Variables & types", "ti": "Equality", "code": "print(5 == 5.0)", "out": "True", "a": "True", "why": "== compares values. 5 and 5.0 are equal in value."}, {"stage": "Variables & types", "ti": "Converting to str", "code": "print(\"Score: \" + str(10))", "out": "Score: 10", "a": "Score: 10", "why": "You cannot add text and a number directly. Convert the number with str() first."}, {"stage": "Variables & types", "ti": "None", "code": "x = None\nprint(x is None)", "out": "True", "a": "True", "why": "None means \"no value\". Test for it with is."}, {"stage": "Strings", "ti": "Joining strings", "code": "print(\"Py\" + \"thon\")", "out": "Python", "a": "Python", "why": "+ joins strings together (concatenation)."}, {"stage": "Strings", "ti": "Repeating strings", "code": "print(\"ab\" * 3)", "out": "ababab", "a": "ababab", "why": "* repeats a string."}, {"stage": "Strings", "ti": "Length", "code": "print(len(\"guitar\"))", "out": "6", "a": "6", "why": "len() counts the characters."}, {"stage": "Strings", "ti": "Uppercase", "code": "print(\"hello\".upper())", "out": "HELLO", "a": "HELLO", "why": "Methods are called with a dot. upper() returns an uppercase copy."}, {"stage": "Strings", "ti": "Indexing", "code": "print(\"guitar\"[0])", "out": "g", "a": "g", "why": "Counting starts at 0, so index 0 is the first character."}, {"stage": "Strings", "ti": "Negative index", "code": "print(\"guitar\"[-1])", "out": "r", "a": "r", "why": "-1 counts from the end: the last character."}, {"stage": "Strings", "ti": "Slicing", "code": "print(\"guitar\"[1:4])", "out": "uit", "a": "uit", "why": "[start:stop] includes start but stops before stop: indexes 1, 2, 3."}, {"stage": "Strings", "ti": "Slice from start", "code": "print(\"guitar\"[:3])", "out": "gui", "a": "gui", "why": "Leaving out the start means from the beginning."}, {"stage": "Strings", "ti": "Replace", "code": "print(\"a-b-c\".replace(\"-\", \"+\"))", "out": "a+b+c", "a": "a+b+c", "why": "replace(old, new) swaps every occurrence."}, {"stage": "Strings", "ti": "Split", "code": "print(\"a,b,c\".split(\",\"))", "out": "['a', 'b', 'c']", "a": "['a', 'b', 'c']", "why": "split() breaks a string into a list. Note the quotes in the printed list."}, {"stage": "Strings", "ti": "Join", "code": "print(\"-\".join([\"a\", \"b\", \"c\"]))", "out": "a-b-c", "a": "a-b-c", "why": "join() glues a list of strings together using the string before the dot."}, {"stage": "Strings", "ti": "Strip", "code": "print(\"  hi  \".strip())", "out": "hi", "a": "hi", "why": "strip() removes spaces from both ends."}, {"stage": "Strings", "ti": "f-string", "code": "name = \"Ada\"\nprint(f\"Hi {name}\")", "out": "Hi Ada", "a": "Hi Ada", "why": "An f-string lets you put variables inside {curly braces}."}, {"stage": "Strings", "ti": "f-string maths", "code": "a = 3\nb = 4\nprint(f\"{a} + {b} = {a + b}\")", "out": "3 + 4 = 7", "a": "3 + 4 = 7", "why": "Anything inside {} is evaluated, including expressions."}, {"stage": "Strings", "ti": "Membership", "code": "print(\"gui\" in \"guitar\")", "out": "True", "a": "True", "why": "in checks whether one string appears inside another."}, {"stage": "Strings", "ti": "Find", "code": "print(\"guitar\".find(\"t\"))", "out": "3", "a": "3", "why": "find() returns the index of the first match, or -1 if there is none."}, {"stage": "Conditionals", "ti": "if / else", "code": "n = 4\nif n > 3:\n    print(\"big\")\nelse:\n    print(\"small\")", "out": "big", "a": "big", "why": "Indentation (4 spaces) shows which lines belong to the if or else."}, {"stage": "Conditionals", "ti": "elif", "code": "n = 0\nif n > 0:\n    print(\"positive\")\nelif n < 0:\n    print(\"negative\")\nelse:\n    print(\"zero\")", "out": "zero", "a": "zero", "why": "elif is checked only if the earlier conditions were False."}, {"stage": "Conditionals", "ti": "and", "code": "print(5 > 3 and 2 > 4)", "out": "False", "a": "False", "why": "and is True only if both sides are True."}, {"stage": "Conditionals", "ti": "or", "code": "print(5 > 3 or 2 > 4)", "out": "True", "a": "True", "why": "or is True if at least one side is True."}, {"stage": "Conditionals", "ti": "not", "code": "print(not True)", "out": "False", "a": "False", "why": "not flips True to False and False to True."}, {"stage": "Conditionals", "ti": "Truthiness", "code": "print(bool(\"\"))", "out": "False", "a": "False", "why": "Empty strings, empty lists, 0 and None count as False. Other values count as True."}, {"stage": "Conditionals", "ti": "Chained comparison", "code": "x = 5\nprint(1 < x < 10)", "out": "True", "a": "True", "why": "Python lets you chain comparisons, like in maths."}, {"stage": "Lists", "ti": "Indexing a list", "code": "notes = [\"C\", \"D\", \"E\"]\nprint(notes[1])", "out": "D", "a": "D", "why": "Lists use square brackets and start counting at 0."}, {"stage": "Lists", "ti": "Last item", "code": "notes = [\"C\", \"D\", \"E\"]\nprint(notes[-1])", "out": "E", "a": "E", "why": "-1 is the last item."}, {"stage": "Lists", "ti": "Append", "code": "notes = [\"C\", \"D\"]\nnotes.append(\"E\")\nprint(notes)", "out": "['C', 'D', 'E']", "a": "['C', 'D', 'E']", "why": "append() adds one item to the end. It changes the list in place."}, {"stage": "Lists", "ti": "Length of a list", "code": "print(len([10, 20, 30, 40]))", "out": "4", "a": "4", "why": "len() counts the items."}, {"stage": "Lists", "ti": "Slicing a list", "code": "print([1, 2, 3, 4, 5][1:3])", "out": "[2, 3]", "a": "[2, 3]", "why": "Same rule as strings: start included, stop excluded."}, {"stage": "Lists", "ti": "Sum, min, max", "code": "nums = [4, 9, 2]\nprint(sum(nums), min(nums), max(nums))", "out": "15 2 9", "a": "15 2 9", "why": "sum(), min() and max() work on whole lists."}, {"stage": "Lists", "ti": "Sort", "code": "nums = [3, 1, 2]\nnums.sort()\nprint(nums)", "out": "[1, 2, 3]", "a": "[1, 2, 3]", "why": "sort() orders the list in place, smallest first."}, {"stage": "Lists", "ti": "Pop", "code": "nums = [1, 2, 3]\nlast = nums.pop()\nprint(last, nums)", "out": "3 [1, 2]", "a": "3 [1, 2]", "why": "pop() removes and returns the last item (or an index you give it)."}, {"stage": "Lists", "ti": "Insert", "code": "nums = [1, 3]\nnums.insert(1, 2)\nprint(nums)", "out": "[1, 2, 3]", "a": "[1, 2, 3]", "why": "insert(index, item) puts an item at a position, shifting the rest."}, {"stage": "Lists", "ti": "Membership", "code": "print(3 in [1, 2, 3])", "out": "True", "a": "True", "why": "in works on lists too."}, {"stage": "Lists", "ti": "range as a list", "code": "print(list(range(4)))", "out": "[0, 1, 2, 3]", "a": "[0, 1, 2, 3]", "why": "range(4) gives 0, 1, 2, 3. It stops before 4."}, {"stage": "Lists", "ti": "range with start", "code": "print(list(range(2, 5)))", "out": "[2, 3, 4]", "a": "[2, 3, 4]", "why": "range(start, stop) starts at 2 and stops before 5."}, {"stage": "Lists", "ti": "range with step", "code": "print(list(range(0, 10, 3)))", "out": "[0, 3, 6, 9]", "a": "[0, 3, 6, 9]", "why": "range(start, stop, step) counts in jumps."}, {"stage": "Loops", "ti": "for loop", "code": "for i in range(3):\n    print(i)", "out": "0\n1\n2", "a": "0 1 2", "why": "A for loop repeats its indented block once per item."}, {"stage": "Loops", "ti": "Loop over a list", "code": "for note in [\"C\", \"E\", \"G\"]:\n    print(note)", "out": "C\nE\nG", "a": "C E G", "why": "The loop variable takes each value in turn."}, {"stage": "Loops", "ti": "Accumulator", "code": "total = 0\nfor n in [1, 2, 3, 4]:\n    total += n\nprint(total)", "out": "10", "a": "10", "why": "Start at 0 and add each item. This pattern is called an accumulator."}, {"stage": "Loops", "ti": "while loop", "code": "n = 3\nwhile n > 0:\n    print(n)\n    n -= 1", "out": "3\n2\n1", "a": "3 2 1", "why": "A while loop repeats as long as its condition is True. Change something inside, or it never stops."}, {"stage": "Loops", "ti": "break", "code": "for i in range(10):\n    if i == 3:\n        break\n    print(i)", "out": "0\n1\n2", "a": "0 1 2", "why": "break leaves the loop immediately."}, {"stage": "Loops", "ti": "continue", "code": "for i in range(5):\n    if i == 2:\n        continue\n    print(i)", "out": "0\n1\n3\n4", "a": "0 1 3 4", "why": "continue skips the rest of this round and goes to the next."}, {"stage": "Loops", "ti": "enumerate", "code": "for i, ch in enumerate(\"abc\"):\n    print(i, ch)", "out": "0 a\n1 b\n2 c", "a": "0 a 1 b 2 c", "why": "enumerate() gives you the index and the item together."}, {"stage": "Loops", "ti": "Nested loop", "code": "for a in range(2):\n    for b in range(2):\n        print(a, b)", "out": "0 0\n0 1\n1 0\n1 1", "a": "0 0 0 1 1 0 1 1", "why": "The inner loop runs fully for each step of the outer loop."}, {"stage": "Dicts, tuples & sets", "ti": "Dict lookup", "code": "d = {\"E\": 40, \"A\": 45}\nprint(d[\"A\"])", "out": "45", "a": "45", "why": "A dict maps keys to values. You look up a value with its key."}, {"stage": "Dicts, tuples & sets", "ti": "Add to a dict", "code": "d = {\"a\": 1}\nd[\"b\"] = 2\nprint(d)", "out": "{'a': 1, 'b': 2}", "a": "{'a': 1, 'b': 2}", "why": "Assigning to a new key adds it."}, {"stage": "Dicts, tuples & sets", "ti": "get with default", "code": "d = {\"a\": 1}\nprint(d.get(\"z\", 0))", "out": "0", "a": "0", "why": "get() returns a default instead of raising an error when the key is missing."}, {"stage": "Dicts, tuples & sets", "ti": "Looping a dict", "code": "d = {\"a\": 1, \"b\": 2}\nfor k, v in d.items():\n    print(k, v)", "out": "a 1\nb 2", "a": "a 1 b 2", "why": "items() gives each key and value pair."}, {"stage": "Dicts, tuples & sets", "ti": "Dict keys", "code": "d = {\"a\": 1, \"b\": 2}\nprint(list(d.keys()))", "out": "['a', 'b']", "a": "['a', 'b']", "why": "keys() lists the keys."}, {"stage": "Dicts, tuples & sets", "ti": "Tuple", "code": "t = (1, 2, 3)\nprint(t[0])", "out": "1", "a": "1", "why": "A tuple is like a list, but it cannot be changed after it is created."}, {"stage": "Dicts, tuples & sets", "ti": "Unpacking", "code": "a, b = (10, 20)\nprint(b, a)", "out": "20 10", "a": "20 10", "why": "You can unpack a tuple into separate variables."}, {"stage": "Dicts, tuples & sets", "ti": "Set removes duplicates", "code": "print(sorted(set([3, 1, 3, 2, 1])))", "out": "[1, 2, 3]", "a": "[1, 2, 3]", "why": "A set keeps only unique items. sorted() turns the result back into an ordered list."}, {"stage": "Dicts, tuples & sets", "ti": "Set size", "code": "print(len({1, 2, 2, 3}))", "out": "3", "a": "3", "why": "Duplicates collapse: the set holds 1, 2 and 3."}, {"stage": "Functions", "ti": "Define and call", "code": "def hi():\n    print(\"hi\")\n\nhi()", "out": "hi", "a": "hi", "why": "def defines a function. Nothing runs until you call it with ()."}, {"stage": "Functions", "ti": "Parameters", "code": "def double(n):\n    return n * 2\n\nprint(double(4))", "out": "8", "a": "8", "why": "Parameters are the inputs. return sends a value back."}, {"stage": "Functions", "ti": "Two parameters", "code": "def add(a, b):\n    return a + b\n\nprint(add(2, 3))", "out": "5", "a": "5", "why": "Arguments are matched to parameters in order."}, {"stage": "Functions", "ti": "Default value", "code": "def greet(name=\"friend\"):\n    return \"Hi \" + name\n\nprint(greet())", "out": "Hi friend", "a": "Hi friend", "why": "A default value is used when you do not pass that argument."}, {"stage": "Functions", "ti": "Keyword argument", "code": "def power(base, exp):\n    return base ** exp\n\nprint(power(exp=2, base=5))", "out": "25", "a": "25", "why": "Naming the arguments lets you pass them in any order."}, {"stage": "Functions", "ti": "No return", "code": "def f():\n    x = 1\n\nprint(f())", "out": "None", "a": "None", "why": "A function with no return gives back None."}, {"stage": "Functions", "ti": "Scope", "code": "x = 10\n\ndef f():\n    x = 5\n    return x\n\nf()\nprint(x)", "out": "10", "a": "10", "why": "The x inside the function is a separate local variable. The outer x is unchanged."}, {"stage": "Functions", "ti": "Return multiple", "code": "def minmax(nums):\n    return min(nums), max(nums)\n\nlo, hi = minmax([4, 9, 2])\nprint(lo, hi)", "out": "2 9", "a": "2 9", "why": "Returning several values actually returns a tuple, which you can unpack."}, {"stage": "Functions", "ti": "Lambda", "code": "sq = lambda n: n * n\nprint(sq(6))", "out": "36", "a": "36", "why": "A lambda is a tiny one-line function."}, {"stage": "Handy tools", "ti": "List comprehension", "code": "print([n * 2 for n in range(4)])", "out": "[0, 2, 4, 6]", "a": "[0, 2, 4, 6]", "why": "A list comprehension builds a list in one line: expression, then for."}, {"stage": "Handy tools", "ti": "Comprehension with if", "code": "print([n for n in range(10) if n % 2 == 0])", "out": "[0, 2, 4, 6, 8]", "a": "[0, 2, 4, 6, 8]", "why": "Add an if to keep only some items."}, {"stage": "Handy tools", "ti": "sorted with key", "code": "print(sorted([\"pear\", \"fig\", \"banana\"], key=len))", "out": "['fig', 'pear', 'banana']", "a": "['fig', 'pear', 'banana']", "why": "key tells sorted() what to compare: here, the length of each word."}, {"stage": "Handy tools", "ti": "Reverse sort", "code": "print(sorted([3, 1, 2], reverse=True))", "out": "[3, 2, 1]", "a": "[3, 2, 1]", "why": "reverse=True sorts largest first. sorted() returns a new list."}, {"stage": "Handy tools", "ti": "zip", "code": "print(list(zip([1, 2], [\"a\", \"b\"])))", "out": "[(1, 'a'), (2, 'b')]", "a": "[(1, 'a'), (2, 'b')]", "why": "zip() pairs up items from two lists."}, {"stage": "Handy tools", "ti": "any and all", "code": "nums = [2, 4, 5]\nprint(any(n % 2 == 1 for n in nums), all(n > 1 for n in nums))", "out": "True True", "a": "True True", "why": "any() is True if at least one item passes; all() is True only if every item passes."}, {"stage": "Handy tools", "ti": "Dict comprehension", "code": "print({n: n * n for n in range(3)})", "out": "{0: 0, 1: 1, 2: 4}", "a": "{0: 0, 1: 1, 2: 4}", "why": "Dict comprehensions build a dict in one line."}, {"stage": "Handy tools", "ti": "String formatting numbers", "code": "print(f\"{3.14159:.2f}\")", "out": "3.14", "a": "3.14", "why": "Inside an f-string, :.2f means show 2 decimal places."}, {"stage": "Handy tools", "ti": "Reversing", "code": "print(\"guitar\"[::-1])", "out": "ratiug", "a": "ratiug", "why": "A step of -1 walks backwards, which reverses a string."}, {"stage": "Errors & classes", "ti": "try / except", "code": "try:\n    print(1 / 0)\nexcept ZeroDivisionError:\n    print(\"oops\")", "out": "oops", "a": "oops", "why": "try runs risky code. If that error happens, the except block runs instead of crashing."}, {"stage": "Errors & classes", "ti": "int() failing", "code": "try:\n    n = int(\"abc\")\nexcept ValueError:\n    n = -1\nprint(n)", "out": "-1", "a": "-1", "why": "int(\"abc\") raises a ValueError. We catch it and use a fallback value."}, {"stage": "Errors & classes", "ti": "finally", "code": "try:\n    print(\"a\")\nfinally:\n    print(\"b\")", "out": "a\nb", "a": "a b", "why": "finally always runs, whether or not an error happened."}, {"stage": "Errors & classes", "ti": "Class and method", "code": "class Dog:\n    def __init__(self, name):\n        self.name = name\n\n    def speak(self):\n        return self.name + \" says woof\"\n\nprint(Dog(\"Rex\").speak())", "out": "Rex says woof", "a": "Rex says woof", "why": "A class bundles data and functions. __init__ runs when you create an object; self is the object itself."}, {"stage": "Errors & classes", "ti": "Instance attributes", "code": "class Counter:\n    def __init__(self):\n        self.n = 0\n\n    def add(self):\n        self.n += 1\n\nc = Counter()\nc.add()\nc.add()\nprint(c.n)", "out": "2", "a": "2", "why": "Each object keeps its own copy of its attributes."}, {"stage": "Errors & classes", "ti": "Modules", "code": "import math\nprint(math.sqrt(16))", "out": "4.0", "a": "4.0", "why": "import brings in extra tools. math.sqrt() gives a square root, as a float."}];
+const escH=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const rnd=n=>Math.floor(Math.random()*n);
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=rnd(i+1);[a[i],a[j]]=[a[j],a[i]]}return a};
+const DECK=[],STAGES=[];
+const add=c=>{c.id=DECK.length;DECK.push(c);return c};
+const stage=n=>STAGES.push({name:n,start:DECK.length});
+const CATS={predict:'Predict the output',concept:'Concepts',tool:'Built-ins & methods'};
+const norm=s=>String(s).replace(/\s+/g,' ').trim().replace(/[“”"]/g,"'").replace(/[‘’]/g,"'");
+const codeBlock=c=>`<pre class="code">${escH(c)}</pre>`;
+const runBlock=c=>`<div class="pyrun">${codeBlock(c)}<div class="row"><button class="btn" data-action="pyrun" data-code="${encodeURIComponent(c)}">▶ Run it</button><button class="btn ghost" data-action="pyedit" data-code="${encodeURIComponent(c)}">Edit in playground</button></div><pre class="pyout" aria-live="polite"></pre></div>`;
+
+/* ---------- concept cards ---------- */
+const CONCEPTS={
+'Print & values':[
+ ['Which function shows text on the screen?','print',['print','print()'],['print','input','show','echo']],
+ ['Which symbol starts a comment?','#',['#','hash','hashtag'],['#','//','--','/*']],
+ ['What type of data is "hello"?','str',['str','string'],['str','int','float','bool']]],
+'Numbers & operators':[
+ ['Which operator gives the <b>remainder</b> after division?','%',['%','modulo','mod'],['%','//','/','**']],
+ ['Which operator <b>divides and rounds down</b>?','//',['//','floor division'],['//','/','%','**']],
+ ['Which operator means <b>to the power of</b>?','**',['**','power','exponent'],['**','^','*','%']],
+ ['What type of data is <b>3.14</b>?','float',['float','decimal'],['float','int','str','bool']]],
+'Variables & types':[
+ ['Which function tells you the <b>type</b> of a value?','type',['type','type()'],['type','typeof','kind','what']],
+ ['Which function converts a value to a <b>whole number</b>?','int',['int','int()'],['int','float','str','round']],
+ ['Which of these is a Python Boolean value?','True',['True'],['True','true','TRUE','yes']],
+ ['Which function asks the user to <b>type something in</b>?','input',['input','input()'],['input','print','read','ask']]],
+'Strings':[
+ ['Which method turns a string into <b>lowercase</b>?','lower',['lower','lower()','.lower()'],['lower','small','down','lcase']],
+ ['Which function returns the <b>number of characters</b> in a string?','len',['len','len()'],['len','count','size','length']],
+ ['What is the index of the <b>first</b> character of a string?','0',['0','zero'],['0','1','-1','first']],
+ ['Which method splits a string into a <b>list</b>?','split',['split','split()','.split()'],['split','cut','break','divide']]],
+'Conditionals':[
+ ['Which keyword means "otherwise, if another condition is true"?','elif',['elif'],['elif','else if','elseif','otherwise']],
+ ['Which operator <b>compares</b> two values for equality?','==',['==','double equals'],['==','=','!=','is']],
+ ['What character must end an <code>if</code> line?',':',[':','colon'],[':',';','.',',']]],
+'Lists':[
+ ['Which method adds an item to the <b>end</b> of a list?','append',['append','append()','.append()'],['append','add','push','insert']],
+ ['Which method removes and returns the <b>last</b> item of a list?','pop',['pop','pop()'],['pop','remove','delete','drop']],
+ ['Which brackets create a list?','[ ]',['[]','[ ]','square brackets','square'],['[ ]','( )','{ }','< >']],
+ ['What does <code>range(3)</code> start counting from?','0',['0','zero'],['0','1','3','-1']]],
+'Loops':[
+ ['Which keyword starts a loop that goes through each item?','for',['for'],['for','each','loop','repeat']],
+ ['Which keyword <b>stops a loop</b> immediately?','break',['break'],['break','stop','exit','end']],
+ ['Which keyword <b>skips to the next round</b> of a loop?','continue',['continue'],['continue','skip','next','pass']],
+ ['Which loop repeats while a condition is True?','while',['while','while loop'],['while','for','until','do']]],
+'Dicts, tuples & sets':[
+ ['Which data type stores <b>key-value pairs</b>?','dict',['dict','dictionary'],['dict','list','tuple','set']],
+ ['Which of these <b>cannot be changed</b> after it is created?','tuple',['tuple'],['tuple','list','dict','set']],
+ ['Which data type keeps only <b>unique</b> items?','set',['set'],['set','list','tuple','dict']],
+ ['Which brackets does a tuple normally use?','( )',['()','( )','parentheses','round brackets','brackets'],['( )','[ ]','{ }','< >']]],
+'Functions':[
+ ['Which keyword <b>defines</b> a function?','def',['def'],['def','function','func','define']],
+ ['Which keyword <b>sends a value back</b> from a function?','return',['return'],['return','give','send','yield']],
+ ['What does a function return if it has no <code>return</code>?','None',['None'],['None','0','False','""']]],
+'Handy tools':[
+ ['Which function pairs up items from two lists?','zip',['zip','zip()'],['zip','pair','join','merge']],
+ ['Which function is True if <b>every</b> item passes a test?','all',['all','all()'],['all','any','every','each']],
+ ['Which function sorts and returns a <b>new</b> list?','sorted',['sorted','sorted()'],['sorted','sort','order','arrange']]],
+'Errors & classes':[
+ ['Which keyword catches an error?','except',['except'],['except','catch','rescue','handle']],
+ ['Which block <b>always runs</b>, error or not?','finally',['finally'],['finally','else','always','end']],
+ ['Which keyword brings in an extra module?','import',['import'],['import','include','use','require']],
+ ['What is the name of the method that runs when an object is created?','__init__',['__init__','init','__init__()'],['__init__','__new__','__start__','__create__']],
+ ['Inside a class method, which name refers to the object itself?','self',['self'],['self','this','me','cls']]]
+};
+const ORDER=[];
+PYC.forEach(c=>{if(!ORDER.includes(c.stage))ORDER.push(c.stage)});
+ORDER.forEach(stg=>{
+  stage(stg);
+  PYC.filter(c=>c.stage===stg).forEach(c=>{
+    const single=!c.code.includes('\n')&&c.code.length<=46;
+    add({cat:'predict',grp:'pred'+stg,ti:c.ti,
+      f:{p:'What does this code print?',a:c.a,t:'text',acc:[c.a],ph:'Type the output',vis:()=>codeBlock(c.code),
+         pool:()=>shuffle(PYC.filter(x=>x.a!==c.a).sort((x,y)=>(y.stage===stg)-(x.stage===stg)||Math.random()-.5).slice(0,12).map(x=>x.a))},
+      r:single?{p:`Which code prints <b>${escH(c.a)}</b>?`,a:c.code,t:'text',matchOnly:true,
+        pool:()=>shuffle(PYC.filter(x=>x.a!==c.a&&!x.code.includes('\n')&&x.code.length<=46).map(x=>x.code)).slice(0,12)}:null,
+      teach:`<p>${escH(c.why)}</p>${runBlock(c.code)}`,
+      why:`${escH(c.why)}<pre class="code">${escH(c.code)}</pre><p>Output: <b>${escH(c.out.replace(/\n/g,' ⏎ '))}</b></p>`});
+  });
+  (CONCEPTS[stg]||[]).forEach(([q,a,acc,opts])=>{
+    add({cat:'concept',grp:'con'+stg,ti:q.replace(/<[^>]+>/g,'').replace(/&[a-z]+;/g,'').slice(0,64),
+      f:{p:q,a,t:'text',acc,opts,ph:'Type your answer'},r:null,
+      teach:`<p>${q}</p><p><b>${escH(a)}</b></p>`,why:`<b>${escH(a)}</b>`});
+  });
+});
+STAGES.forEach((s,i)=>{s.end=i<STAGES.length-1?STAGES[i+1].start:DECK.length});
+
+/* ---------- Pyodide runner ---------- */
+let pyReady=null;
+function loadPy(){
+  if(pyReady)return pyReady;
+  pyReady=new Promise((res,rej)=>{
+    const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js';
+    s.onload=async()=>{try{res(await loadPyodide())}catch(e){pyReady=null;rej(e)}};
+    s.onerror=()=>{pyReady=null;rej(new Error('Could not load Python. Check your connection and try again.'))};
+    document.head.appendChild(s);
+  });
+  return pyReady;
+}
+async function runPy(code,el){
+  el.textContent='Loading Python… (the first run takes a few seconds)';
+  try{
+    const py=await loadPy();let out='';
+    py.setStdout({batched:s=>{out+=s+'\n'}});py.setStderr({batched:s=>{out+=s+'\n'}});
+    await py.runPythonAsync(code);
+    el.textContent=out||'(no output)';
+  }catch(e){el.textContent=String(e.message||e).split('\n').slice(-4).join('\n')}
+}
+let pgCode='# Try some Python here\nfor n in range(1, 4):\n    print(n, "squared is", n ** 2)\n';
+function renderPlay(){
+  E.$app.innerHTML=`<div class="stack"><section class="card stack"><h2>Playground</h2><p class="muted small">Write Python and run it right here, in your browser. Nothing is sent anywhere.</p>
+   <textarea id="pg" class="pgarea" spellcheck="false" autocapitalize="off" autocomplete="off" rows="12" aria-label="Python code">${escH(pgCode)}</textarea>
+   <div class="row"><button class="btn primary" data-action="pgrun">▶ Run</button><button class="btn ghost" data-action="pgreset">Reset</button></div>
+   <pre class="pyout" id="pgout" aria-live="polite"></pre></section>
+   <section class="card stack"><h3 style="margin:0">Quick reference</h3>
+   <table class="tbl"><tr><th>Do this</th><th>Write this</th></tr>
+   <tr><td>Show text</td><td><code>print("hi")</code></td></tr><tr><td>Ask the user</td><td><code>name = input("Name? ")</code></td></tr>
+   <tr><td>Decide</td><td><code>if x &gt; 3: … elif … else: …</code></td></tr><tr><td>Repeat</td><td><code>for i in range(5): …</code></td></tr>
+   <tr><td>Make a function</td><td><code>def f(a, b): return a + b</code></td></tr><tr><td>Handle errors</td><td><code>try: … except ValueError: …</code></td></tr></table></section></div>`;
+}
+
+window.APP={
+  name:'Py by Py',slug:'py-by-py',storeKey:'pybypy-v1',
+  deck:DECK,stages:STAGES,cats:CATS,
+  tabs:[{id:'home',label:'Learn',icon:'home'},{id:'play',label:'Play',icon:'library'},{id:'cards',label:'Cards',icon:'cards'},{id:'settings',label:'Settings',icon:'settings'}],
+  titles:{play:'Playground'},views:{play:renderPlay},
+  squash:norm,
+  action:(act,t)=>{
+    if(act==='pyrun'){const out=t.closest('.pyrun').querySelector('.pyout');runPy(decodeURIComponent(t.dataset.code),out)}
+    else if(act==='pyedit'){pgCode=decodeURIComponent(t.dataset.code);document.getElementById('modal-root').innerHTML='';E.setTab('play')}
+    else if(act==='pgrun'){pgCode=document.getElementById('pg').value;runPy(pgCode,document.getElementById('pgout'))}
+    else if(act==='pgreset'){pgCode='# Try some Python here\nprint("Hello!")\n';renderPlay()}
+  },
+  init:()=>{document.addEventListener('keydown',e=>{if(e.target&&e.target.id==='pg'&&e.key==='Tab'){e.preventDefault();const t=e.target,s=t.selectionStart;t.value=t.value.slice(0,s)+'    '+t.value.slice(t.selectionEnd);t.selectionStart=t.selectionEnd=s+4}})}
+};
+
+/* ===================== shared engine ===================== */
+(function(){
+'use strict';
+const A=window.APP;
+const DECK=A.deck,STAGES=A.stages,CATS=A.cats;
+const MODES=A.modes||[{key:'match',name:'Match',lvl:'Level 1'},{key:'type',name:'Type',lvl:'Level 2'}];
+const TOTAL=DECK.length;
+const INTERVALS=[0,1,3,7,14,30,60,120];
+const $app=document.getElementById('app');
+const tabsEl=document.getElementById('tabs');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const rnd=n=>Math.floor(Math.random()*n);
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=rnd(i+1);[a[i],a[j]]=[a[j],a[i]]}return a};
+const sample=(a,n)=>shuffle(a).slice(0,n);
+const uniq=a=>[...new Set(a)];
+const ICON_SPEAK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+const ICON_PLAY='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+const SV='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">';
+const ICONS={
+  home:SV+'<path d="M4 19.5V5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-1.5Z"/><path d="M8 7h6M8 11h6"/></svg>',
+  library:SV+'<path d="M12 7c-1.5-1.3-3.5-2-6-2H3v13h3c2.5 0 4.5.7 6 2 1.5-1.3 3.5-2 6-2h3V5h-3c-2.5 0-4.5.7-6 2Z"/><path d="M12 7v13"/></svg>',
+  globe:SV+'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg>',
+  cards:SV+'<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>',
+  settings:SV+'<path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg>'
+};
+
+/* ---------- squash & grading ---------- */
+function squash(s){
+  if(A.squash)return A.squash(s);
+  s=String(s);if(A.norm)s=A.norm(s);
+  return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/♯/g,'#').replace(/♭/g,'b')
+    .replace(/\bfirst\b/g,'1st').replace(/\bsecond\b/g,'2nd').replace(/\bthird\b/g,'3rd').replace(/\bfourth\b/g,'4th').replace(/\bfifth\b/g,'5th').replace(/\bsixth\b/g,'6th').replace(/\bseventh\b/g,'7th').replace(/\beighth\b/g,'8th')
+    .replace(/^(the|a|an)\s+/,'').replace(/[\s\-_.,'"’()+]/g,'');
+}
+function gradeTyped(sp,raw){
+  const typed=raw.trim();
+  if(sp.t==='num')return{ok:typed===String(sp.a)};
+  if(sp.t==='text'){
+    const ok=(sp.acc||[sp.a]).some(x=>x[0]==='='?typed===x.slice(1):squash(typed)===squash(x));
+    return{ok};
+  }
+  return A.grade?A.grade(sp,raw):{ok:false};
+}
+const hintFor=sp=>{
+  if(A.hint){const h=A.hint(sp);if(h)return h}
+  return String(sp.a).replace(/\S/g,(ch,i)=>i===0?ch:'_').replace(/_(?=_)/g,'_ ');
+};
+
+/* ---------- storage ---------- */
+function load(k,fb){try{const v=localStorage.getItem(k);return v?JSON.parse(v):fb}catch(e){return fb}}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}}
+function freshState(){return{v:1,batches:[],cards:{},settings:{passMark:80,maxBatch:40,revDiv:3,autoplay:true,sfx:true,theme:''},stats:{streak:0,lastDay:-1,answers:0}}}
+let S=load(A.storeKey,null)||freshState();
+S.settings=Object.assign(freshState().settings,S.settings||{});
+S.cards=S.cards||{};S.batches=S.batches||[];S.stats=Object.assign(freshState().stats,S.stats||{});
+let storageOk=save(A.storeKey,S);
+function persist(){storageOk=save(A.storeKey,S)}
+const today=()=>{const d=new Date();return Math.floor((d.getTime()-d.getTimezoneOffset()*60000)/864e5)};
+function applyTheme(){const t=S.settings.theme;if(t)document.documentElement.setAttribute('data-theme',t);else document.documentElement.removeAttribute('data-theme')}
+applyTheme();
+
+/* ---------- specs ---------- */
+function resolve(c,dir){const sp=(dir==='r'&&c.r)?c.r:c.f;return sp.dyn?Object.assign({},sp,sp.dyn()):sp}
+const specOf=item=>item.spec||(item.spec=resolve(DECK[item.cid],item.dir));
+const visOf=sp=>typeof sp.vis==='function'?sp.vis():(sp.vis||'');
+const canR=(c,mode)=>!!c.r&&!(mode==='type'&&c.r.matchOnly);
+
+/* ---------- batches ---------- */
+const learnedCount=()=>S.batches.filter(x=>x.done).reduce((n,x)=>n+x.size,0);
+const current=()=>S.batches[S.batches.length-1];
+const newCards=b=>DECK.slice(b.start,b.start+b.size);
+const revCards=b=>(b.extras||[]).map(i=>DECK[i]).filter(Boolean);
+const batchCards=b=>newCards(b).concat(revCards(b));
+const missCount=id=>{const w=S.cards[id];return w&&w.miss?w.miss:0};
+function pickRevision(n,from,to){
+  if(n<=0)return[];
+  const pool=DECK.filter(c=>{const p=S.cards[c.id];return p&&p.box>0&&!(c.id>=from&&c.id<to)});
+  if(!pool.length)return[];
+  const sc=pool.map(c=>({id:c.id,score:missCount(c.id)*10+Math.random()*4+(S.cards[c.id].box<=1?3:0)}));
+  sc.sort((a,b)=>b.score-a.score);return sc.slice(0,n).map(x=>x.id);
+}
+function nextSize(){
+  if(!S.batches.length)return 10;
+  const b=current();if(b.skipped)return 10;
+  const sc=MODES.map(m=>b.modes[m.key].first).filter(x=>x!=null&&x>=0);
+  const avg=sc.length?sc.reduce((a,c)=>a+c,0)/sc.length:0;
+  let size=b.size;if(avg>=90)size+=10;else if(avg>=80)size+=5;else if(avg<65)size-=5;
+  return Math.max(10,Math.min(S.settings.maxBatch,size));
+}
+function batchAvg(b){const s=MODES.map(m=>b.modes[m.key].first).filter(x=>x!=null&&x>=0);return s.length?Math.round(s.reduce((a,c)=>a+c,0)/s.length):null}
+function newBatch(){
+  const start=learnedCount();if(start>=TOTAL)return;
+  const total=Math.min(nextSize(),TOTAL-start);
+  const revision=S.batches.some(b=>b.done)?Math.round(total/S.settings.revDiv):0;
+  const size=Math.max(1,total-revision);
+  const extras=pickRevision(revision,start,start+size);
+  const modes={};MODES.forEach(m=>modes[m.key]={best:null,first:null,passed:false});
+  S.batches.push({n:S.batches.length+1,start,size,extras,done:false,modes});
+  persist();
+}
+if(!S.batches.length||S.batches[S.batches.length-1].done)newBatch();
+const modeUnlocked=(b,i)=>i===0||b.modes[MODES[i-1].key].passed;
+const batchComplete=b=>MODES.every(m=>b.modes[m.key].passed);
+function finishBatch(){
+  const b=current();if(!b||b.done||!batchComplete(b))return;
+  b.done=true;const d=today();
+  newCards(b).forEach(c=>{const ws=S.cards[c.id]||(S.cards[c.id]={});ws.box=1;ws.due=d+1});
+  newBatch();persist();
+}
+const dueCards=()=>{const d=today();return DECK.filter(c=>{const w=S.cards[c.id];return w&&w.box>0&&w.due<=d})};
+function status(c){const w=S.cards[c.id],b=current();if(w&&w.box>0)return w.due<=today()?'due':'learned';if(b&&!b.done&&c.id>=b.start&&c.id<b.start+b.size)return'current';return'new'}
+function bumpStreak(){const d=today(),st=S.stats;if(st.lastDay===d)return;st.streak=st.lastDay===d-1?st.streak+1:1;st.lastDay=d}
+const liveStreak=()=>{const d=today();return(S.stats.lastDay===d||S.stats.lastDay===d-1)?S.stats.streak:0};
+const weakCards=()=>DECK.filter(c=>missCount(c.id)>=2).sort((a,b)=>missCount(b.id)-missCount(a.id)).slice(0,12);
+
+/* ---------- view state ---------- */
+let view='home',tab='home',study=null,quiz=null,lastResult=null;
+let filt={q:'',cat:'all',st:'all'};
+function toast(msg){const t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2400)}
+function topStats(){
+  const due=dueCards().length,st=liveStreak();
+  document.getElementById('topstats').innerHTML=(st?`<span class="pill"><b>${st}</b> day streak</span>`:'')+(due?`<span class="pill"><b>${due}</b> due</span>`:'');
+}
+tabsEl.innerHTML='<nav>'+A.tabs.map(t=>`<button data-action="tab" data-tab="${t.id}">${ICONS[t.icon]||''}${t.label}</button>`).join('')+'</nav>';
+const TITLES=Object.assign({home:'Learn',cards:'Cards',settings:'Settings',study:'Study',quiz:'Test',result:'Result'},A.titles||{});
+function render(){
+  document.getElementById('screen-title').textContent=TITLES[view]||'';
+  topStats();
+  tabsEl.hidden=(view==='study'||view==='quiz'||view==='result');
+  tabsEl.querySelectorAll('button').forEach(b=>{if(b.dataset.tab===tab)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
+  const V=Object.assign({home:renderHome,cards:renderCards,settings:renderSettings,study:renderStudy,quiz:renderQuiz,result:renderResult},A.views||{});
+  (V[view]||renderHome)();
+}
+function setTab(t){tab=t;view=t;study=null;quiz=null;render();window.scrollTo(0,0)}
+function goHome(){view='home';tab='home';study=null;quiz=null;render();window.scrollTo(0,0)}
+
+/* ---------- card face ---------- */
+function cardHTML(c,{hide=false,revealed=true}={}){
+  const show=!hide||revealed,sp=resolve(c,'f'),rv=c.r?resolve(c,'r'):null;
+  const ans=sp.a;
+  return`<div class="card lift wordcard pop"><span class="chip">${CATS[c.cat]}</span>
+    <p class="en" style="font-size:1.2rem">${sp.p}</p>
+    ${visOf(sp)}
+    ${show?`<p class="fr ans" style="${String(ans).length>22?'font-size:1.15rem':String(ans).length>9?'font-size:1.5rem':''}">${esc(ans)}</p>`:`<button class="reveal" data-action="reveal">Tap to show the answer</button>`}
+    ${c.hear&&A.play?`<div class="row" style="justify-content:center"><button class="icon-btn" data-action="hear" data-id="${c.id}" aria-label="Hear it">${ICON_SPEAK}</button></div>`:''}
+    ${show?`<div class="example"><div>${c.teach||''}${rv&&!rv.dyn?`<p class="muted small">Also: ${rv.p} <b>${esc(rv.a)}</b></p>`:''}</div></div>`:''}
+  </div>`;
+}
+
+/* ---------- home ---------- */
+function renderHome(){
+  const learned=learnedCount(),b=current(),due=dueCards().length,weak=weakCards();
+  let html=`<div class="stack">`;
+  if(!storageOk)html+=`<p class="notice">This browser isn't saving progress (private mode or blocked storage). Use Settings → Backup to keep a copy.</p>`;
+  const cur=STAGES.find(s=>{for(let i=s.start;i<s.end;i++){const w=S.cards[i];if(!(w&&w.box>0))return true}return false});
+  const catRows=Object.keys(CATS).map(k=>{const all=DECK.filter(c=>c.cat===k),got=all.filter(c=>(S.cards[c.id]||{}).box>0).length;return all.length?`<span class="chip plain">${CATS[k]} ${got}/${all.length}</span>`:''}).join('');
+  html+=`<section class="card lift stack"><p class="muted small">Cards learned</p>
+    <p class="big-num">${learned}<span class="muted" style="font-size:1.05rem"> / ${TOTAL}</span></p>
+    <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="${TOTAL}" aria-valuenow="${learned}"><i style="width:${(learned/TOTAL*100).toFixed(2)}%"></i></div>
+    ${cur?(()=>{const n=DECK.slice(cur.start,cur.end).filter(c=>(S.cards[c.id]||{}).box>0).length,t=cur.end-cur.start;return`<div class="stage"><div class="row spread"><p class="small"><b>${STAGES.indexOf(cur)+1}/${STAGES.length}</b> · ${cur.name}</p><p class="muted small">${n}/${t}</p></div><div class="bar" style="height:6px"><i style="width:${n/t*100}%"></i></div></div>`})():''}
+    <div class="row" style="gap:6px">${catRows}</div></section>`;
+  if(due)html+=`<section class="card row spread"><h2>${due} card${due>1?'s':''} to review</h2><div class="row"><button class="btn primary" data-action="review" data-style="mixed">Review</button><button class="btn" data-action="review" data-style="type">Review by typing</button></div></section>`;
+  if(weak.length)html+=`<section class="card stack"><div class="row spread"><h2>Weak spots</h2><span class="chip">${weak.length}</span></div><p class="muted small">${weak.slice(0,5).map(c=>esc(c.ti)).join(' · ')}${weak.length>5?' …':''}</p><div class="btn-row"><button class="btn" data-action="weak" data-mode="match">Match them</button><button class="btn" data-action="weak" data-mode="type">Type them</button></div></section>`;
+  if(!b){
+    html+=`<section class="card stack"><p class="praise">All done!</p><h2>You've worked through all ${TOTAL} cards.</h2><p class="muted">Keep up your reviews, and use the Cards tab to drill any topic.</p></section>`;
+  }else{
+    const complete=batchComplete(b);
+    html+=`<section class="card stack"><div><h3 style="margin:0 0 2px">Batch ${b.n}</h3><div class="row spread" style="align-items:baseline"><h2>Cards ${b.start+1}–${b.start+b.size}</h2><span class="chip">${b.size} new${(b.extras&&b.extras.length)?` + ${b.extras.length}`:''}</span></div></div>
+      <p class="muted small">${newCards(b).slice(0,6).map(c=>esc(c.ti)).join(' · ')}${b.size>6?' …':''}</p>
+      ${(b.extras&&b.extras.length)?`<p class="muted small">Revision mixed in: ${b.extras.slice(0,5).map(i=>esc(DECK[i].ti)).join(' · ')}${b.extras.length>5?' …':''}</p>`:''}
+      <div class="ladder">${MODES.map((m,i)=>{const st=b.modes[m.key],un=modeUnlocked(b,i),cls=st.passed?'passed':un?'ready':'locked';
+        const label=st.passed?`Passed · ${st.best}%`:un?(st.best!=null?`Best ${st.best}% · need ${S.settings.passMark}%`:'Ready'):'Locked';
+        return`<button class="rung ${cls}" data-action="test" data-mode="${m.key}" ${un?'':'disabled'} aria-label="${m.name} test, ${label}"><span class="lvl">${m.lvl}</span><span class="name">${m.name}</span><span class="st">${label}</span></button>`}).join('')}</div>
+      ${complete?`<p class="notice good">Batch passed with a first-try average of ${batchAvg(b)}%. Next batch: ${nextSize()} cards.</p><div class="btn-row"><button class="btn primary" data-action="study">Study cards</button><button class="btn" data-action="nextbatch">Unlock next batch</button></div>`
+      :`<div class="btn-row"><button class="btn primary" data-action="study">Study cards</button>${(()=>{const i=MODES.findIndex((m,idx)=>modeUnlocked(b,idx)&&!b.modes[m.key].passed);const m=MODES[i];return`<button class="btn" data-action="test" data-mode="${m.key}">Test: ${m.name}</button>`})()}</div>`}
+    </section>`;
+  }
+  if(A.homeExtra)html+=A.homeExtra();
+  const done=S.batches.filter(x=>x.done).reverse(),showAll=window.__showAll;
+  if(done.length){
+    html+=`<h3>Finished batches</h3><section class="card batch-list" style="padding:6px 16px">${(showAll?done:done.slice(0,6)).map(x=>`<div class="bl"><div class="bl-t"><span>Batch ${x.n} · cards ${x.start+1}–${x.start+x.size}</span>${batchAvg(x)!=null?`<span class="muted small">${batchAvg(x)}% first try</span>`:''}</div><div class="bl-a"><button class="mini solid" data-action="studybatch" data-n="${x.n}">Study</button><button class="mini" data-action="testbatch" data-mode="match" data-n="${x.n}">Match</button><button class="mini" data-action="testbatch" data-mode="type" data-n="${x.n}">Type</button></div></div>`).join('')}</section>${done.length>6&&!showAll?`<button class="btn ghost wide" data-action="showall">Show all ${done.length} batches</button>`:''}`;
+  }
+  $app.innerHTML=html+`</div>`;
+}
+
+/* ---------- study ---------- */
+const studyOrder=ids=>shuffle(ids);
+function startStudy(ids){study={ids:studyOrder(ids),i:0,hide:false,revealed:false};view='study';render();window.scrollTo(0,0)}
+function renderStudy(){
+  const{ids,i}=study,c=DECK[ids[i]];
+  $app.innerHTML=`<div class="stack">
+    <div class="qhead"><button class="icon-btn" data-action="home" aria-label="Back">✕</button><div class="bar"><i style="width:${(i+1)/ids.length*100}%"></i></div><span class="pill"><b>${i+1}</b>/${ids.length}</span></div>
+    ${cardHTML(c,{hide:study.hide,revealed:study.revealed})}
+    <label class="switch card" style="padding:12px 16px"><span>Hide answers (quiz yourself)</span><input type="checkbox" id="hide-toggle" ${study.hide?'checked':''}></label>
+    <div class="btn-row sticky-bar"><button class="btn" data-action="prev" ${i===0?'disabled':''}>Previous</button>${i<ids.length-1?`<button class="btn primary" data-action="next">Next</button>`:`<button class="btn primary" data-action="studydone">Done</button>`}</div></div>`;
+  const ht=document.getElementById('hide-toggle');ht.onchange=()=>{study.hide=ht.checked;study.revealed=false;renderStudy()};
+  if(S.settings.autoplay&&c.hear&&A.play&&(!study.hide||study.revealed))setTimeout(()=>A.play(c.hear),200);
+}
+
+/* ---------- quiz engine ---------- */
+function makeItem(c,mode){
+  if(mode==='listen')return{cid:c.id,mode:'listen',kind:'listen',dir:'f',spec:resolve(c,'f')};
+  if(mode==='tap')return{cid:c.id,mode:'tap',kind:'tap',dir:'r',spec:resolve(c,'r')};
+  let dir='f';
+  if(mode==='match'){if(canR(c,mode)&&c.r.t!=='tap'&&Math.random()<.5)dir='r'}
+  else if(canR(c,mode)&&Math.random()<.5)dir='r';
+  const sp=resolve(c,dir);
+  let kind=mode==='match'?'match':(sp.t==='tap'?'tap':'type');
+  if(mode==='match'&&dir==='f'&&c.f.audio&&Math.random()<.45)kind='listen';
+  return{cid:c.id,mode,kind,dir,spec:sp};
+}
+const makeItems=(cs,modeFor)=>shuffle(cs).map(c=>makeItem(c,modeFor(c)));
+function startTest(mode){const b=current(),cs=batchCards(b);quiz={type:'batch',mode,queue:makeItems(cs,()=>mode),total:cs.length,first:{},doneIds:new Set(),answered:null,missed:[],tapSel:null};view='quiz';render();window.scrollTo(0,0)}
+function startPractice(ids,mode){
+  const cs=ids.map(i=>DECK[i]).filter(Boolean),pool=mode==='listen'?cs.filter(c=>c.f.audio):mode==='tap'?cs.filter(c=>c.r&&c.r.t==='tap'):cs;
+  if(!pool.length)return toast('Nothing to practise yet');
+  quiz={type:'practice',mode,queue:makeItems(pool,()=>mode),total:pool.length,first:{},doneIds:new Set(),answered:null,missed:[],tapSel:null};view='quiz';render();window.scrollTo(0,0);
+}
+function startReview(style){
+  const cs=shuffle(dueCards()).slice(0,40);if(!cs.length)return;
+  const modeFor=c=>style==='type'?'type':style==='match'?'match':(((S.cards[c.id]||{}).box||1)<=1?'match':'type');
+  quiz={type:'review',queue:makeItems(cs,modeFor),total:cs.length,first:{},doneIds:new Set(),answered:null,missed:[],tapSel:null};view='quiz';render();window.scrollTo(0,0);
+}
+const ansOf=(x,dir)=>{const sp=(dir==='r'&&x.r)?x.r:x.f;return sp.dyn||sp.t==='tap'?null:sp.a};
+function optionsFor(item){
+  if(item.opts)return item.opts;
+  const c=DECK[item.cid],sp=specOf(item),a=sp.a;let pool=[];
+  if(sp.opts)pool=sp.opts.slice();
+  else if(sp.pool)pool=(typeof sp.pool==='function'?sp.pool():sp.pool).slice();
+  else if(sp.t==='num'){const n=+a;for(let k=Math.max(0,n-4);k<=n+4;k++)pool.push(String(k))}
+  else if(A.defaultOpts&&A.defaultOpts(sp))pool=A.defaultOpts(sp).slice();
+  else pool=DECK.filter(x=>x.grp===c.grp&&x.id!==c.id).map(x=>ansOf(x,item.dir)).filter(x=>x!=null);
+  pool=uniq(pool).filter(x=>x!==a);
+  if(pool.length<3)pool=uniq(pool.concat(DECK.filter(x=>x.cat===c.cat&&x.id!==c.id).map(x=>ansOf(x,item.dir)).filter(x=>x!=null&&x!==a)));
+  if(pool.length<3)pool=uniq(pool.concat(DECK.filter(x=>x.id!==c.id).map(x=>ansOf(x,item.dir)).filter(x=>x!=null&&x!==a)));
+  item.opts=shuffle([a,...sample(pool,3)]);return item.opts;
+}
+function tapRender(item,sel,res){return specOf(item).tap.render(sel,res)}
+function renderQuiz(){
+  const item=quiz.queue[0],c=DECK[item.cid],sp=specOf(item),a=quiz.answered,doneN=quiz.doneIds.size;
+  const title=quiz.type==='review'?'Review':quiz.type==='practice'?(({match:'Match',type:'Type',listen:'Ear',tap:'Map'})[quiz.mode]||quiz.mode)+' practice':MODES.find(m=>m.key===quiz.mode).name;
+  let body='';
+  if(item.kind==='match'||item.kind==='listen'){
+    const opts=optionsFor(item);
+    if(item.kind==='listen'){
+      body=`<div class="card lift wordcard prompt"><div class="listen-hero"><button class="play-big" data-action="playq" aria-label="Play the sound">${ICON_PLAY}</button></div>${a?`<p class="en">${esc(c.ti)}</p>`:`<p class="muted small">Listen, then choose what you heard.</p>`}</div>`;
+    }else{
+      body=`<div class="card lift wordcard prompt"><span class="chip">${CATS[c.cat]}</span><p class="en" style="font-size:1.2rem">${sp.p}</p>${visOf(sp)}</div>`;
+    }
+    body+=`<div class="options">${opts.map((o,k)=>{let cls='';if(a){if(o===sp.a)cls='correct';else if(k===a.pick)cls='wrong'}return`<button class="opt ${cls}" data-action="pick" data-k="${k}" ${a?'disabled':''}><span class="k">${k+1}</span><span>${esc(o)}</span></button>`}).join('')}</div>`;
+  }else if(item.kind==='tap'){
+    const res=a?{ok:a.ok,sel:a.sel}:null;
+    body=`<div class="card lift wordcard prompt"><span class="chip">${CATS[c.cat]}</span><p class="en" style="font-size:1.2rem">${sp.p}</p>${visOf(sp)}${sp.sub?`<p class="muted small">${sp.sub}</p>`:''}<div id="tapboard" style="width:100%">${tapRender(item,quiz.tapSel,res)}</div></div>
+      ${a?'':`<div class="btn-row"><button class="btn" data-action="giveup">Show answer</button><button class="btn primary" id="checktap" data-action="checktap" ${quiz.tapSel==null?'disabled':''}>Check</button></div>`}`;
+  }else{
+    const keys=A.keys?A.keys(sp):[];
+    body=`<div class="card lift wordcard prompt"><span class="chip">${CATS[c.cat]}</span><p class="en" style="font-size:1.2rem">${sp.p}</p>${visOf(sp)}${item.hint&&!a?`<p class="muted" style="font-family:var(--f-word);letter-spacing:.15em">${esc(hintFor(sp))}</p>`:''}</div>
+      <form id="typeform" class="stack" autocomplete="off">
+        <input id="type-answer" class="type-in ${a?(a.ok?'correct':'wrong'):''}" autocapitalize="off" autocorrect="off" spellcheck="false" ${sp.t==='num'?'inputmode="numeric"':''} placeholder="${esc(sp.ph||'Type your answer…')}" aria-label="Your answer" ${a?'readonly':''} value="${a?esc(a.typed):''}">
+        ${a?'':`${keys.length?`<div class="accents" aria-label="Symbol keys">${keys.map(k=>`<button type="button" data-action="key" data-c="${esc(k)}">${k===' '?'space':esc(k)}</button>`).join('')}</div>`:''}
+        <div class="btn-row"><button type="button" class="btn" data-action="${item.hint?'giveup':'hint'}">${item.hint?'Show answer':'Hint (counts as a miss)'}</button><button class="btn primary" type="submit">Check</button></div>`}
+      </form>`;
+  }
+  let fb='';
+  if(a){
+    fb=`<div class="feedback ${a.ok?'good':'bad'} pop"><span class="hand">${a.ok?pickPraise():'Not quite…'}</span>${a.note?`<p class="fb-body small"><b>${esc(a.note)}</b></p>`:''}<p class="fb-body"><b>${esc(sp.a)}</b></p><div class="fb-body small">${c.why||''}</div></div>
+      <div class="sticky-bar">${item.kind==='type'&&!a.ok&&!item.hint?`<div class="btn-row"><button class="btn" data-action="override">I was right</button><button class="btn primary" data-action="continue" id="continue-btn">Continue</button></div>`:`<button class="btn primary wide" data-action="continue" id="continue-btn">Continue</button>`}</div>`;
+  }
+  $app.innerHTML=`<div class="stack"><div class="qhead"><button class="icon-btn" data-action="quit" aria-label="Quit test">✕</button><div class="bar"><i style="width:${doneN/quiz.total*100}%"></i></div><span class="pill"><b>${doneN}</b>/${quiz.total}</span></div>
+    <p class="muted small">${title}${quiz.type==='batch'?` · Batch ${current().n}`:''}${item.retry?' · second go':''}</p>${body}${fb}</div>`;
+  if(item.kind==='tap'&&a&&sp.tap.after)sp.tap.after();
+  if(item.kind==='listen'&&!a&&A.play)setTimeout(()=>A.play(c.f.audio),200);
+  if(item.kind==='type'&&!a){const inp=document.getElementById('type-answer');inp&&inp.focus({preventScroll:true})}
+  if(a){const b=document.getElementById('continue-btn');b&&b.focus({preventScroll:true});if(S.settings.autoplay&&c.hear&&A.play)A.play(c.hear)}
+}
+const PRAISE=['Nice.','Spot on.','Clean.','Exactly.','Good one.','Yes!','Right.'];
+const pickPraise=()=>PRAISE[rnd(PRAISE.length)];
+function sfx(ok){if(S.settings.sfx&&A.sfx)A.sfx(ok)}
+function recordAnswer(ok,extra){
+  const item=quiz.queue[0];
+  const snap={cid:item.cid,wasFirst:!(item.cid in quiz.first),ws:S.cards[item.cid]?JSON.parse(JSON.stringify(S.cards[item.cid])):null,missedLen:quiz.missed.length};
+  extra=Object.assign({snap},extra||{});
+  if(!(item.cid in quiz.first)){quiz.first[item.cid]=ok;if(!ok){quiz.missed.push(item.cid);const ws=S.cards[item.cid]||(S.cards[item.cid]={box:0,due:0});ws.miss=(ws.miss||0)+1}}
+  if(quiz.type==='review'||quiz.type==='practice'){
+    const ws=S.cards[item.cid]||(S.cards[item.cid]={box:1,due:today()});
+    if(!item.retry){if(ok){ws.box=Math.min((ws.box||1)+1,INTERVALS.length-1);ws.due=today()+INTERVALS[ws.box]}else{ws.box=1;ws.due=today()+1}}
+  }
+  S.stats.answers++;sfx(ok);
+  quiz.answered=Object.assign({ok},extra);render();
+}
+function overrideRight(){
+  const a=quiz&&quiz.answered;if(!a||a.ok||!a.snap)return;const s=a.snap;
+  if(s.wasFirst)delete quiz.first[s.cid];quiz.missed.length=s.missedLen;
+  if(s.ws)S.cards[s.cid]=s.ws;else delete S.cards[s.cid];
+  S.stats.answers--;quiz.answered=null;
+  recordAnswer(true,{typed:a.typed,note:'Counted as right — your call.'});
+}
+function checkTyped(raw){
+  const item=quiz.queue[0],sp=specOf(item);if(!raw.trim())return;
+  let r=gradeTyped(sp,raw);
+  if(item.hint&&r.ok)r={ok:false,note:'Correct, but a hint was used, so it goes back in the pile.'};
+  recordAnswer(r.ok,{typed:raw,note:r.note||''});
+}
+function advance(){
+  const item=quiz.queue.shift(),ok=quiz.answered&&quiz.answered.ok;
+  if(ok)quiz.doneIds.add(item.cid);else quiz.queue.push(retryOf(item));
+  quiz.answered=null;quiz.tapSel=null;
+  if(!quiz.queue.length)return finishQuiz();
+  render();window.scrollTo(0,0);
+}
+function retryOf(item){
+  const c=DECK[item.cid];let dir=item.dir;
+  if(item.mode==='tap')return{cid:item.cid,mode:'tap',kind:'tap',dir:'r',spec:resolve(c,'r'),retry:true};
+  if(canR(c,item.mode)){const nd=dir==='f'?'r':'f',sp=resolve(c,nd);if(!(item.mode==='match'&&sp.t==='tap')&&!(item.mode==='listen'&&nd==='r'))dir=nd}
+  const sp=resolve(c,dir);let kind=item.kind;
+  if(item.mode==='type')kind=sp.t==='tap'?'tap':'type';
+  else if(item.mode==='match')kind=(item.kind==='listen'&&dir==='f')?'listen':'match';
+  return{cid:item.cid,mode:item.mode,kind,dir,spec:sp,retry:true};
+}
+function finishQuiz(){
+  const ids=Object.keys(quiz.first),score=Math.round(ids.filter(k=>quiz.first[k]).length/ids.length*100);
+  const res={type:quiz.type,mode:quiz.mode,score,missed:quiz.missed.slice(),passed:false};
+  if(quiz.type==='batch'){
+    const st=current().modes[quiz.mode];
+    if(st.first==null)st.first=score;
+    st.best=Math.max(st.best??0,score);
+    if(score>=S.settings.passMark)st.passed=true;
+    res.passed=st.passed&&score>=S.settings.passMark;
+  }else res.passed=true;
+  if(quiz.type==='practice')res.practice=true;
+  bumpStreak();persist();lastResult=res;quiz=null;view='result';render();window.scrollTo(0,0);
+}
+function renderResult(){
+  const r=lastResult,b=current(),nextIdx=r.type==='batch'?MODES.findIndex(m=>m.key===r.mode)+1:-1,complete=b&&batchComplete(b);
+  let actions='';
+  if(r.type==='review'||r.practice)actions=`<button class="btn primary wide" data-action="home">Back</button>`;
+  else if(!r.passed)actions=`<div class="btn-row"><button class="btn primary" data-action="study">Study again</button><button class="btn" data-action="test" data-mode="${r.mode}">Try again</button></div>`;
+  else if(complete)actions=`<button class="btn primary wide" data-action="nextbatch">Unlock next batch (${nextSize()} cards)</button>`;
+  else if(nextIdx<MODES.length)actions=`<button class="btn wide" data-action="test" data-mode="${MODES[nextIdx].key}">Next level: ${MODES[nextIdx].name}</button><button class="btn ghost wide" data-action="home">Back</button>`;
+  $app.innerHTML=`<div class="stack"><section class="card lift stack" style="text-align:center;align-items:center">
+    <p class="praise">${r.practice?'Practice done':r.type==='review'?'Review done':r.passed?'Level passed':'Almost!'}</p><p class="result-score">${r.score}%</p>
+    <p class="muted">${r.practice?'right first time. Misses come back in review.':r.type==='review'?'right first time. Missed cards come back tomorrow.':r.passed?`right first time. You needed ${S.settings.passMark}%.`:`right first time. You need ${S.settings.passMark}% to pass. Missed cards are below.`}</p></section>
+    ${actions}
+    ${r.missed.length?`<h3>Missed first time</h3><section class="card missed" style="padding:4px 16px">${r.missed.map(id=>{const c=DECK[id];return`<div class="mrow">${c.hear&&A.play?`<button class="icon-btn" data-action="hear" data-id="${id}" aria-label="Hear ${esc(c.ti)}">${ICON_SPEAK}</button>`:''}<div><p class="w">${esc(c.ti)}</p><p class="muted small">${esc(c.f.a)}</p></div></div>`}).join('')}</section>
+    ${r.type==='batch'&&!r.passed?`<button class="btn wide" data-action="studymissed">Study just these ${r.missed.length}</button>`:''}`:''}</div>`;
+}
+
+/* ---------- cards list ---------- */
+function renderCards(){
+  const q=filt.q.trim().toLowerCase();
+  let list=DECK.filter(c=>(filt.cat==='all'||c.cat===filt.cat)&&(filt.st==='all'||status(c)===filt.st)&&(!q||c.ti.toLowerCase().includes(q)||String(c.f.a).toLowerCase().includes(q)));
+  const shown=list.slice(0,150);
+  const catBtns=['all',...Object.keys(CATS)].map(k=>`<button data-action="fcat" data-v="${k}" aria-pressed="${filt.cat===k}">${k==='all'?'All':CATS[k]}</button>`).join('');
+  const stBtns=[['all','Any'],['learned','Learned'],['due','Due'],['current','Current'],['new','New']].map(([k,l])=>`<button data-action="fst" data-v="${k}" aria-pressed="${filt.st===k}">${l}</button>`).join('');
+  $app.innerHTML=`<div class="stack"><div class="sticky-search"><input class="search" id="search" type="search" placeholder="Search ${TOTAL} cards" value="${esc(filt.q)}" aria-label="Search cards"><div class="filters">${catBtns}</div><div class="filters">${stBtns}</div></div>
+   ${filt.cat!=='all'?`<section class="card stack"><p class="muted small">Drill <b>${CATS[filt.cat]}</b> using cards you've already learned.</p><div class="btn-row"><button class="btn" data-action="drillcat" data-mode="match">Match</button><button class="btn" data-action="drillcat" data-mode="type">Type</button></div></section>`:''}
+   <p class="muted small">${list.length} card${list.length===1?'':'s'}${list.length>150?' (first 150 shown)':''}</p>
+   <div class="wl">${shown.map(c=>`<button class="wrow${A.thumb?' th':''}" data-action="open" data-id="${c.id}"><span class="n">${A.thumb?A.thumb(c):c.id+1}</span><span class="t"><b>${esc(c.ti)}</b><span>${esc(c.f.a)}</span></span><i class="dot ${status(c)}" aria-label="${status(c)}"></i></button>`).join('')}</div></div>`;
+  const s=document.getElementById('search');s.oninput=()=>{filt.q=s.value;const pos=s.selectionStart;renderCards();const n=document.getElementById('search');n.focus();n.setSelectionRange(pos,pos)};
+}
+function openCard(id){
+  const c=DECK[id],root=document.getElementById('modal-root');
+  root.innerHTML=`<div class="modal" data-action="closemodal"><div class="sheet stack">${cardHTML(c)}<div class="btn-row"><button class="btn" data-action="drillone" data-id="${id}">Quiz me on this</button><button class="btn primary" data-action="closemodal">Close</button></div></div></div>`;
+}
+
+/* ---------- settings ---------- */
+function renderSettings(){
+  const s=S.settings;
+  $app.innerHTML=`<div class="stack"><section class="card stack"><h2>Learning</h2>
+   <div class="field"><label for="set-pass">Pass mark for each level</label><select id="set-pass">${[70,80,90,100].map(v=>`<option value="${v}" ${s.passMark===v?'selected':''}>${v}% right first time</option>`).join('')}</select></div>
+   <div class="field"><label for="set-max">Largest batch size</label><select id="set-max">${[20,30,40,60].map(v=>`<option value="${v}" ${s.maxBatch===v?'selected':''}>${v} cards</option>`).join('')}</select><p class="muted small">Batches grow with your first-try average.</p></div>
+   <div class="field"><label for="set-rev">Revision mixed into each new batch</label><select id="set-rev">${[[4,'A quarter'],[3,'A third'],[2,'Half']].map(([v,l])=>`<option value="${v}" ${s.revDiv===v?'selected':''}>${l}</option>`).join('')}</select><p class="muted small">Older cards you miss most come back first.</p></div>
+   ${A.play?`<label class="switch"><span>Play the sound after each answer</span><input type="checkbox" id="set-autoplay" ${s.autoplay?'checked':''}></label>`:''}
+   ${A.sfx?`<label class="switch"><span>Right/wrong chime</span><input type="checkbox" id="set-sfx" ${s.sfx?'checked':''}></label>`:''}
+   <div class="field"><label for="set-theme">Theme</label><select id="set-theme">${[['','Match my device'],['light','Light'],['dark','Dark']].map(([v,l])=>`<option value="${v}" ${s.theme===v?'selected':''}>${l}</option>`).join('')}</select></div></section>
+  <section class="card stack"><h2>Backup</h2><p class="muted small">Progress lives in this browser. Save a copy to move it to another device.</p><div class="btn-row"><button class="btn" data-action="export">Download backup</button><label class="btn" for="imp" style="cursor:pointer">Restore backup</label></div><input type="file" id="imp" accept="application/json" hidden>
+   <button class="btn danger wide" data-action="reset">Reset all progress</button></section>
+  <p class="muted small" style="text-align:center">${TOTAL} cards · ${S.stats.answers} answers given</p></div>`;
+  const on=(id,fn)=>{const e=document.getElementById(id);if(!e)return;e.onchange=()=>{fn(e);persist()}};
+  on('set-pass',e=>s.passMark=+e.value);on('set-max',e=>s.maxBatch=+e.value);on('set-rev',e=>s.revDiv=+e.value);
+  on('set-autoplay',e=>s.autoplay=e.checked);on('set-sfx',e=>s.sfx=e.checked);on('set-theme',e=>{s.theme=e.value;applyTheme()});
+  document.getElementById('imp').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const o=JSON.parse(r.result);if(!o||!Array.isArray(o.batches)||typeof o.cards!=='object')throw 0;S=Object.assign(freshState(),o);S.settings=Object.assign(freshState().settings,S.settings||{});persist();applyTheme();toast('Backup restored');render()}catch(x){toast("That file isn't a "+A.name+" backup")}};r.readAsText(f)};
+}
+
+/* ---------- events ---------- */
+document.addEventListener('click',e=>{
+  if(A.click&&A.click(e))return;
+  const tk=e.target.closest('[data-tk]');
+  if(tk&&quiz&&view==='quiz'&&quiz.queue[0].kind==='tap'&&!quiz.answered){
+    quiz.tapSel=tk.dataset.tk;const item=quiz.queue[0];const tsp=specOf(item);
+    if(tsp.tap.update)tsp.tap.update(quiz.tapSel);else document.getElementById('tapboard').innerHTML=tapRender(item,quiz.tapSel,null);
+    const b=document.getElementById('checktap');if(b)b.disabled=false;
+    const again=document.querySelector(`[data-tk="${CSS.escape(quiz.tapSel)}"]`);if(again&&again.focus)again.focus({preventScroll:true});
+    return;
+  }
+  const t=e.target.closest('[data-action]');if(!t)return;
+  const act=t.dataset.action,b=current();
+  if(act==='closemodal'){if(t.classList.contains('modal')&&e.target!==t)return;document.getElementById('modal-root').innerHTML='';return}
+  switch(act){
+    case'tab':setTab(t.dataset.tab);break;
+    case'home':goHome();break;
+    case'study':startStudy(batchCards(b).map(c=>c.id));break;
+    case'studybatch':{const x=S.batches.find(y=>y.n===+t.dataset.n);startStudy(batchCards(x).map(c=>c.id));break}
+    case'studymissed':startStudy(lastResult.missed);break;
+    case'studydone':goHome();break;
+    case'next':study.i++;study.revealed=false;renderStudy();window.scrollTo(0,0);break;
+    case'prev':study.i--;study.revealed=false;renderStudy();window.scrollTo(0,0);break;
+    case'reveal':study.revealed=true;renderStudy();break;
+    case'test':startTest(t.dataset.mode);break;
+    case'testbatch':{const x=S.batches.find(y=>y.n===+t.dataset.n);startPractice(batchCards(x).map(c=>c.id),t.dataset.mode);break}
+    case'nextbatch':finishBatch();goHome();break;
+    case'review':startReview(t.dataset.style);break;
+    case'weak':startPractice(weakCards().map(c=>c.id),t.dataset.mode);break;
+    case'ear':{const reached=DECK.filter(c=>c.f.audio&&((S.cards[c.id]||{}).box>0||(b&&c.id<b.start+b.size)));if(reached.length<2)return toast('Learn some intervals or chords first');startPractice(reached.map(c=>c.id),'listen');break}
+    case'tappractice':{const reached=DECK.filter(c=>c.r&&c.r.t==='tap'&&((S.cards[c.id]||{}).box>0||(b&&c.id<b.start+b.size)));if(reached.length<2)return toast('Learn some countries first');startPractice(shuffle(reached).slice(0,15).map(c=>c.id),'tap');break}
+    case'showall':window.__showAll=true;renderHome();break;
+    case'pick':if(quiz.answered)break;{const item=quiz.queue[0],sp=specOf(item),k=+t.dataset.k;recordAnswer(optionsFor(item)[k]===sp.a,{pick:k})}break;
+    case'playq':{const it=quiz.queue[0];A.play&&A.play(specOf(it).audio||DECK[it.cid].f.audio);break}
+    case'continue':advance();break;
+    case'quit':if(confirm('Quit this test? Progress on it will be lost.')){goHome()}break;
+    case'hint':quiz.queue[0].hint=true;renderQuiz();break;
+    case'giveup':if(quiz.queue[0].kind==='tap')recordAnswer(false,{sel:null});else recordAnswer(false,{typed:'',note:''});break;
+    case'checktap':{const sp=specOf(quiz.queue[0]);recordAnswer(sp.tap.correct(quiz.tapSel),{sel:quiz.tapSel});break}
+    case'key':{const inp=document.getElementById('type-answer');if(inp){const p=inp.selectionStart??inp.value.length;inp.value=inp.value.slice(0,p)+t.dataset.c+inp.value.slice(inp.selectionEnd??p);inp.focus();const np=p+t.dataset.c.length;inp.setSelectionRange(np,np)}break}
+    case'override':overrideRight();break;
+    case'hear':{const c=DECK[+t.dataset.id];c&&A.play&&A.play(c.hear);break}
+    case'fcat':filt.cat=t.dataset.v;renderCards();break;
+    case'fst':filt.st=t.dataset.v;renderCards();break;
+    case'drillcat':{const ids=DECK.filter(c=>c.cat===filt.cat&&(S.cards[c.id]||{}).box>0).map(c=>c.id);if(!ids.length)return toast('Learn some of these first');startPractice(ids,t.dataset.mode);break}
+    case'open':openCard(+t.dataset.id);break;
+    case'drillone':document.getElementById('modal-root').innerHTML='';startPractice([+t.dataset.id],'type');break;
+    case'export':{const bl=new Blob([JSON.stringify(S)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(bl);a.download=A.slug+'-backup.json';a.click();break}
+    case'reset':if(confirm('Reset all progress? This cannot be undone.')){S=freshState();persist();applyTheme();newBatch();render()}break;
+    default:if(A.action)A.action(act,t,e);
+  }
+});
+document.addEventListener('submit',e=>{if(e.target.id==='typeform'){e.preventDefault();if(quiz&&!quiz.answered)checkTyped(document.getElementById('type-answer').value)}});
+document.addEventListener('keydown',e=>{
+  if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('[data-tk]')){e.preventDefault();e.target.click();return}
+  if(view!=='quiz'||!quiz)return;
+  if(/^[1-4]$/.test(e.key)&&!quiz.answered&&document.querySelector('.opt')&&document.activeElement.tagName!=='INPUT'){const b=document.querySelectorAll('.opt')[+e.key-1];b&&b.click()}
+});
+window.E={openCard,render,setTab,toast,esc,S:()=>S,persist,goHome,shuffle,sample,rnd,DECK,ICON_PLAY,ICON_SPEAK,get view(){return view},set view(v){view=v},get tab(){return tab},set tab(v){tab=v},$app};
+if(A.init)A.init();
+render();
+})();
+
+</script>
+</body>
+</html>
